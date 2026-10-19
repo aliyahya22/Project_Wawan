@@ -3,34 +3,26 @@ import { openWhatsAppGeneral } from '../utils/whatsapp';
 import { 
   ArrowRight, 
   MessageCircle, 
-  Clock,
-  ShieldCheck,
-  TrendingUp,
-  Zap,
-  CheckCircle2,
-  FolderLock
+  Clock, 
+  ShieldCheck, 
+  TrendingUp, 
+  Zap, 
+  CheckCircle2, 
+  FolderLock,
+  Sparkles,
+  FileCheck2
 } from 'lucide-react';
 import { AdiraLogo } from './AdiraLogo';
-import { ApplicationForm } from './ApplicationForm';
 
 interface TopupViewProps {
   onOpenApplication: (service?: 'Top Up') => void;
 }
 
 export const TopupView: React.FC<TopupViewProps> = ({ onOpenApplication }) => {
-  const scrollToForm = () => {
-    const el = document.getElementById('topup-form-section');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      onOpenApplication('Top Up');
-    }
-  };
-
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
       
-      {/* BENTO ROW 1: HEADER & DIRECT APPLICATION FORM */}
+      {/* BENTO ROW 1: HEADER & KEUNTUNGAN TOP UP (FORM DIARAHKAN KE BERANDA) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
         
         {/* Bento Overview Card (7 Cols) */}
@@ -75,31 +67,70 @@ export const TopupView: React.FC<TopupViewProps> = ({ onOpenApplication }) => {
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
             <button
               type="button"
-              onClick={scrollToForm}
+              onClick={() => onOpenApplication('Top Up')}
               className="px-6 py-3.5 bg-[#FFCC00] hover:bg-[#F5C400] text-stone-950 font-bold text-xs rounded-xl shadow-xs transition-colors flex items-center justify-center gap-2 cursor-pointer"
             >
-              <span>Ajukan Top Up Sekarang</span>
+              <span>Ajukan Top Up (Kirim Formulir)</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 
             <button
               type="button"
               onClick={() => openWhatsAppGeneral('Top Up Pinjaman BPKB Nasabah Aktif')}
-              className="px-5 py-3.5 bg-[#FAF9F6] hover:bg-stone-100 border border-stone-200 text-stone-800 font-semibold text-xs rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer"
+              className="px-5 py-3.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-950 font-bold text-xs rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer"
             >
               <MessageCircle className="w-4 h-4 text-emerald-700" />
-              <span>Cek Kelayakan Top Up via WA</span>
+              <span>WhatsApp: 0852-8815-7752</span>
             </button>
           </div>
         </div>
 
-        {/* Bento Form Card (5 Cols) */}
-        <div id="topup-form-section" className="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 border border-stone-200/90 shadow-2xs flex flex-col justify-center">
-          <ApplicationForm
-            isEmbedded={true}
-            initialCollateral="BPKB Mobil"
-            showTitle={true}
-          />
+        {/* Bento Card: Keistimewaan Top Up (5 Cols - Pengganti Form) */}
+        <div className="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 border border-stone-200/90 shadow-2xs flex flex-col justify-between space-y-5">
+          <div className="space-y-3">
+            <div className="flex items-center gap-2 text-stone-900 font-bold text-sm">
+              <Sparkles className="w-4 h-4 text-amber-500" />
+              <span>Prioritas Nasabah Setia AXI</span>
+            </div>
+            <p className="text-xs text-stone-500 leading-relaxed">
+              Dapatkan perlakuan jalur cepat (*fast-track approval*) untuk nasabah dengan riwayat bayar tepat waktu.
+            </p>
+          </div>
+
+          <div className="space-y-3 text-xs text-stone-700">
+            <div className="flex items-start gap-3 p-3 bg-[#FAF9F6] rounded-2xl border border-stone-200/80">
+              <Zap className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+              <div>
+                <span className="font-bold text-stone-900 block">Jalur Ekspres Tanpa Cek Ulang</span>
+                <span className="text-stone-500 text-[11px]">Bagi nasabah aktif lancar, proses disetujui tanpa survei rumah kembali.</span>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 p-3 bg-[#FAF9F6] rounded-2xl border border-stone-200/80">
+              <Clock className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+              <div>
+                <span className="font-bold text-stone-900 block">Sisa Angsuran Diperbarui</span>
+                <span className="text-stone-500 text-[11px]">Sisa pokok lama dilunasi dan digantikan kontrak baru dengan dana cair ekstra.</span>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 p-3 bg-[#FAF9F6] rounded-2xl border border-stone-200/80">
+              <ShieldCheck className="w-4 h-4 text-stone-800 shrink-0 mt-0.5" />
+              <div>
+                <span className="font-bold text-stone-900 block">BPKB Tetap Aman di Vault</span>
+                <span className="text-stone-500 text-[11px]">Tidak perlu repot serah terima dokumen fisik baru karena BPKB telah tersimpan rapi.</span>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => onOpenApplication('Top Up')}
+            className="w-full py-3 px-4 bg-stone-900 hover:bg-stone-800 text-white font-semibold text-xs rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <span>Kirim Formulir Pengajuan di Beranda</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
         </div>
 
       </div>
@@ -118,14 +149,14 @@ export const TopupView: React.FC<TopupViewProps> = ({ onOpenApplication }) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="p-4 rounded-2xl border border-stone-200/80 bg-[#FAF9F6] space-y-2">
             <div className="w-7 h-7 rounded-lg bg-stone-900 text-white font-bold text-xs flex items-center justify-center">
               1
             </div>
-            <h3 className="text-xs font-bold text-stone-900">Pemberitahuan Nomor Kontrak</h3>
+            <h3 className="text-xs font-bold text-stone-900">Validasi Nomor Kontrak</h3>
             <p className="text-xs text-stone-600 leading-relaxed">
-              Sebutkan nomor kontrak pinjaman berjalan atau nomor polisi kendaraan kepada staf kami melalui WhatsApp atau formulir website.
+              Cukup sebutkan nomor kontrak aktif atau nomor KTP Anda ke staf konsultan kami untuk verifikasi riwayat angsuran.
             </p>
           </div>
 
@@ -133,9 +164,9 @@ export const TopupView: React.FC<TopupViewProps> = ({ onOpenApplication }) => {
             <div className="w-7 h-7 rounded-lg bg-stone-900 text-white font-bold text-xs flex items-center justify-center">
               2
             </div>
-            <h3 className="text-xs font-bold text-stone-900">Hitung Sisa Pokok & Nilai Baru</h3>
+            <h3 className="text-xs font-bold text-stone-900">Perhitungan Sisa Pokok & Nilai Baru</h3>
             <p className="text-xs text-stone-600 leading-relaxed">
-              Sistem menghitung sisa angsuran berjalan dan menawarkan penyesuaian plafon maksimal yang dapat langsung disetujui.
+              Sistem meninjau sisa angsuran berjalan dan menawarkan penyesuaian plafon maksimal yang dapat langsung disetujui.
             </p>
           </div>
 
@@ -143,49 +174,43 @@ export const TopupView: React.FC<TopupViewProps> = ({ onOpenApplication }) => {
             <div className="w-7 h-7 rounded-lg bg-emerald-700 text-white font-bold text-xs flex items-center justify-center">
               3
             </div>
-            <h3 className="text-xs font-bold text-emerald-950">Pencairan Dana Ditransfer</h3>
+            <h3 className="text-xs font-bold text-emerald-950">Pencairan Dana Tambahan</h3>
             <p className="text-xs text-emerald-900 leading-relaxed">
-              Setelah kesepakatan tenor baru ditandatangani, sisa dana bersih langsung dikirimkan utuh ke rekening tabungan bank Anda.
+              Setelah konfirmasi adendum kontrak baru, dana tambahan langsung cair ke rekening bank Anda dalam hitungan jam.
             </p>
           </div>
         </div>
       </div>
 
-      {/* BENTO ROW 3: KEUNGGULAN KHUSUS DEBITUR BERJALAN BENTO */}
+      {/* BENTO ROW 3: SYARAT KELAYAKAN TOP UP BENTO */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-        <div className="bg-white rounded-3xl p-6 border border-stone-200/90 shadow-2xs space-y-2.5">
-          <div className="w-9 h-9 rounded-2xl bg-amber-50 text-amber-800 border border-amber-200 flex items-center justify-center">
-            <Zap className="w-4 h-4 text-amber-700" />
+        <div className="bg-white rounded-3xl p-6 border border-stone-200/90 shadow-2xs space-y-2">
+          <div className="flex items-center gap-2 text-stone-900 font-bold text-sm">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <span>Angsuran Min. 6 Bulan</span>
           </div>
-          <h3 className="text-sm font-bold text-stone-900 tracking-tight">
-            Persetujuan Prioritas Kilat
-          </h3>
           <p className="text-xs text-stone-600 leading-relaxed">
-            Data Anda telah tercatat dalam sistem whitelist internal, sehingga tidak memerlukan verifikasi dari nol.
+            Fasilitas top up berlaku bagi pembiayaan aktif yang telah berjalan minimal 6 kali pembayaran cicilan secara tertib.
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl p-6 border border-stone-200/90 shadow-2xs space-y-2.5">
-          <div className="w-9 h-9 rounded-2xl bg-stone-100 text-stone-900 border border-stone-200 flex items-center justify-center">
-            <ShieldCheck className="w-4 h-4 text-stone-900" />
+        <div className="bg-white rounded-3xl p-6 border border-stone-200/90 shadow-2xs space-y-2">
+          <div className="flex items-center gap-2 text-stone-900 font-bold text-sm">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <span>Catatan Pembayaran Bagus</span>
           </div>
-          <h3 className="text-sm font-bold text-stone-900 tracking-tight">
-            Keamanan Dokumen Terjamin
-          </h3>
           <p className="text-xs text-stone-600 leading-relaxed">
-            BPKB fisik tetap tersimpan di lemari besi pengarsipan resmi tanpa ada risiko perpindahan tangan.
+            Riwayat pembayaran tanpa tunggakan kronis menjamin persetujuan plafon baru langsung disetujui tanpa kendala.
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl p-6 border border-stone-200/90 shadow-2xs space-y-2.5">
-          <div className="w-9 h-9 rounded-2xl bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center justify-center">
-            <CheckCircle2 className="w-4 h-4 text-emerald-700" />
+        <div className="bg-white rounded-3xl p-6 border border-stone-200/90 shadow-2xs space-y-2">
+          <div className="flex items-center gap-2 text-stone-900 font-bold text-sm">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <span>Kondisi Kendaraan Terawat</span>
           </div>
-          <h3 className="text-sm font-bold text-stone-900 tracking-tight">
-            Pilihan Tenor Diperpanjang
-          </h3>
           <p className="text-xs text-stone-600 leading-relaxed">
-            Sesuaikan kembali beban cicilan bulanan agar tetap seimbang dengan arus kas keuangan keluarga atau bisnis Anda.
+            Pajak STNK aktif dan kendaraan dalam kondisi laik jalan mendukung taksasi nilai cair maksimal.
           </p>
         </div>
       </div>

@@ -68,7 +68,7 @@ export const BerandaView: React.FC<BerandaViewProps> = ({
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
                 <div className="bg-white p-2.5 rounded-xl border border-stone-200/60">
                   <span className="text-stone-500 block text-[11px]">Motor</span>
-                  <span className="font-bold text-stone-900">Mulai 2016</span>
+                  <span className="font-bold text-stone-900">Mulai 2017</span>
                 </div>
                 <div className="bg-white p-2.5 rounded-xl border border-stone-200/60">
                   <span className="text-stone-500 block text-[11px]">Mobil</span>
@@ -76,17 +76,17 @@ export const BerandaView: React.FC<BerandaViewProps> = ({
                 </div>
                 <div className="bg-white p-2.5 rounded-xl border border-stone-200/60">
                   <span className="text-stone-500 block text-[11px]">Truk</span>
-                  <span className="font-bold text-stone-900">Mulai 2018</span>
+                  <span className="font-bold text-stone-900">Mulai 2019</span>
                 </div>
                 <div className="bg-white p-2.5 rounded-xl border border-stone-200/60">
                   <span className="text-stone-500 block text-[11px]">Pickup</span>
-                  <span className="font-bold text-stone-900">Mulai 2021</span>
+                  <span className="font-bold text-stone-900">Mulai 2019</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Action CTAs */}
+          {/* Action CTAs & Direct Hotline 0852-8815-7752 */}
           <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <button
               type="button"
@@ -100,11 +100,20 @@ export const BerandaView: React.FC<BerandaViewProps> = ({
             <button
               type="button"
               onClick={() => openWhatsAppGeneral('Pertanyaan Gadai BPKB')}
-              className="px-5 py-3.5 bg-[#FAF9F6] hover:bg-stone-100 border border-stone-200 text-stone-800 font-semibold text-xs rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer"
+              className="px-5 py-3.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-950 font-bold text-xs rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer"
             >
               <MessageCircle className="w-4 h-4 text-emerald-700" />
-              <span>Konsultasi via WhatsApp</span>
+              <span>WhatsApp: 0852-8815-7752</span>
             </button>
+
+            <a
+              href="tel:085288157752"
+              className="px-4 py-3.5 bg-[#FAF9F6] hover:bg-stone-100 border border-stone-200 text-stone-800 font-bold text-xs rounded-xl transition-colors flex items-center justify-center gap-2"
+              title="Hubungi Telepon Langsung"
+            >
+              <PhoneCall className="w-4 h-4 text-stone-700" />
+              <span>0852-8815-7752</span>
+            </a>
           </div>
 
           {/* Subtext */}
@@ -195,7 +204,7 @@ export const BerandaView: React.FC<BerandaViewProps> = ({
               Pinjaman Dana Tunai
             </h3>
             <p className="text-xs text-stone-600 leading-relaxed">
-              Pencairan dana langsung dengan jaminan BPKB Motor (min. 2016), Mobil (min. 2010), Truk (min. 2018), atau Pickup (min. 2021). Plafon hingga 85% taksasi unit.
+              Pencairan dana langsung dengan jaminan BPKB Motor (min. 2017), Mobil (min. 2010), Truk (min. 2019), atau Pickup (min. 2019). Plafon hingga 85% taksasi unit.
             </p>
             <div className="pt-1 text-xs text-stone-500 space-y-1">
               <div>- Tenor fleksibel hingga 60 bulan</div>
@@ -394,19 +403,28 @@ export const BerandaView: React.FC<BerandaViewProps> = ({
         </div>
 
         <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full md:w-auto">
+          <a
+            href="tel:085288157752"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-white/10 hover:bg-white/15 text-white font-bold text-xs rounded-xl transition-colors border border-white/20"
+            title="Hubungi Telepon Langsung"
+          >
+            <PhoneCall className="w-4 h-4 text-amber-300" />
+            <span>0852-8815-7752</span>
+          </a>
+
           <button
             type="button"
             onClick={() => openWhatsAppGeneral('Konsultasi Mendesak')}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#FFCC00] hover:bg-[#F5C400] text-stone-950 font-bold text-xs rounded-xl transition-colors shadow-xs cursor-pointer"
           >
             <MessageCircle className="w-4 h-4 text-stone-950 fill-stone-950/20" />
-            <span>Chat WhatsApp Langsung</span>
+            <span>Chat WA: 0852-8815-7752</span>
           </button>
           
           <button
             type="button"
             onClick={scrollToForm}
-            className="w-full sm:w-auto px-6 py-3.5 bg-white/10 hover:bg-white/15 text-white font-semibold text-xs rounded-xl transition-colors border border-white/20 cursor-pointer"
+            className="w-full sm:w-auto px-5 py-3.5 bg-white/10 hover:bg-white/15 text-white font-semibold text-xs rounded-xl transition-colors border border-white/20 cursor-pointer"
           >
             Isi Form Pengajuan
           </button>

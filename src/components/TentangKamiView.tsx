@@ -123,7 +123,7 @@ export const TentangKamiView: React.FC = () => {
           <div className="p-4 rounded-2xl bg-[#FAF9F6] border border-stone-200/80 space-y-2">
             <h3 className="text-xs font-bold text-stone-900">1. Pinjaman Dana Tunai</h3>
             <p className="text-xs text-stone-600 leading-relaxed">
-              Pencairan dana langsung dengan jaminan BPKB Motor (min. 2016), Mobil (min. 2010), Truk (min. 2018), atau Pickup (min. 2021).
+              Pencairan dana langsung dengan jaminan BPKB Motor (min. 2017), Mobil (min. 2010), Truk (min. 2019), atau Pickup (min. 2019).
             </p>
           </div>
 
@@ -172,7 +172,7 @@ export const TentangKamiView: React.FC = () => {
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#FFCC00] hover:bg-[#F5C400] text-stone-950 font-bold text-xs rounded-xl transition-colors shadow-xs cursor-pointer"
           >
             <MessageCircle className="w-4 h-4 text-stone-950 fill-stone-950/20" />
-            <span>Chat WhatsApp Tim AXI</span>
+            <span>Chat WA: 0852-8815-7752</span>
           </button>
         </div>
       </div>

@@ -44,7 +44,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
               <div>
                 <strong className="text-stone-900 block mb-1">1. Kelayakan Kendaraan & Dokumen</strong>
                 <p>
-                  Pengajuan pinjaman hanya diproses untuk unit kendaraan yang memenuhi kriteria tahun standar: Motor minimal tahun 2016, Mobil minimal tahun 2010, Truk minimal tahun 2018, dan Pickup minimal tahun 2021. Dokumen BPKB dan STNK wajib asli dan bukan hasil tindak pidana kejahatan.
+                  Pengajuan pinjaman hanya diproses untuk unit kendaraan yang memenuhi kriteria tahun standar: Motor minimal tahun 2017, Mobil minimal tahun 2010, Truk minimal tahun 2019, dan Pickup minimal tahun 2019. Dokumen BPKB dan STNK wajib asli dan bukan hasil tindak pidana kejahatan.
                 </p>
               </div>
               <div>

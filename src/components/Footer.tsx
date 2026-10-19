@@ -37,7 +37,7 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
 
             <p className="text-xs text-stone-600 leading-relaxed max-w-sm">
-              Layanan pencairan dana tunai cepat jaminan BPKB kendaraan bermotor (Motor min. 2016, Mobil min. 2010, Truk min. 2018, Pickup min. 2021). Resmi, aman, transparan, dan terpercaya.
+              Layanan pencairan dana tunai cepat jaminan BPKB kendaraan bermotor (Motor min. 2017, Mobil min. 2010, Truk min. 2019, Pickup min. 2019). Resmi, aman, transparan, dan terpercaya.
             </p>
 
             {/* Alamat Kantor dari CMS Settings */}
@@ -54,8 +54,13 @@ export const Footer: React.FC<FooterProps> = ({
                 <span>{settings.workingHours}</span>
               </div>
               <div className="flex items-center gap-2 text-stone-600">
-                <Phone className="w-3.5 h-3.5 text-stone-400 shrink-0" />
-                <span>Hotline: {settings.displayPhone}</span>
+                <Phone className="w-3.5 h-3.5 text-stone-500 shrink-0" />
+                <a 
+                  href="tel:085288157752" 
+                  className="font-bold text-stone-800 hover:text-stone-950 transition-colors"
+                >
+                  Hotline & WA: {settings.displayPhone || '0852-8815-7752'}
+                </a>
               </div>
             </div>
           </div>

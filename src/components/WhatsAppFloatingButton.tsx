@@ -22,7 +22,7 @@ export const WhatsAppFloatingButton: React.FC = () => {
             </button>
           </div>
           <p className="text-stone-600 mb-2 leading-relaxed">
-            Konsultasikan simulasi angsuran, syarat, atau cek taksasi kendaraan Anda langsung bersama tim kami.
+            Konsultasikan persyaratan, cek estimasi taksasi nilai kendaraan, atau info pengajuan Anda langsung bersama tim kami.
           </p>
           <button
             type="button"

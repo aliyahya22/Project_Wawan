@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { ApplicationFormData } from '../types';
 import { 
   User, 
@@ -40,22 +40,59 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
 
   // Available collateral options dynamically linked to CMS vehicle criteria
   const collateralOptions = [
-    { value: 'BPKB Motor', label: `BPKB Motor (Min. ${vehicleCriteria.motor?.minYear || 2016})`, minYear: vehicleCriteria.motor?.minYear || 2016 },
-    { value: 'BPKB Mobil', label: `BPKB Mobil (Min. ${vehicleCriteria.mobil?.minYear || 2010})`, minYear: vehicleCriteria.mobil?.minYear || 2010 },
-    { value: 'BPKB Truk', label: `BPKB Truk (Min. ${vehicleCriteria.truck?.minYear || 2018})`, minYear: vehicleCriteria.truck?.minYear || 2018 },
-    { value: 'BPKB Pickup', label: `BPKB Pickup (Min. ${vehicleCriteria.pickup?.minYear || 2021})`, minYear: vehicleCriteria.pickup?.minYear || 2021 },
+    { 
+      value: 'BPKB Motor', 
+      label: `BPKB Motor (Minimal Tahun ${vehicleCriteria.motor?.minYear || 2017})`, 
+      minYear: vehicleCriteria.motor?.minYear || 2017,
+      type: 'Motor'
+    },
+    { 
+      value: 'BPKB Mobil', 
+      label: `BPKB Mobil (Minimal Tahun ${vehicleCriteria.mobil?.minYear || 2010})`, 
+      minYear: vehicleCriteria.mobil?.minYear || 2010,
+      type: 'Mobil'
+    },
+    { 
+      value: 'BPKB Truk', 
+      label: `BPKB Truk (Minimal Tahun ${vehicleCriteria.truck?.minYear || 2019})`, 
+      minYear: vehicleCriteria.truck?.minYear || 2019,
+      type: 'Truk'
+    },
+    { 
+      value: 'BPKB Pickup', 
+      label: `BPKB Pickup (Minimal Tahun ${vehicleCriteria.pickup?.minYear || 2019})`, 
+      minYear: vehicleCriteria.pickup?.minYear || 2019,
+      type: 'Pickup'
+    },
   ];
 
-  // Year options list from current year down to 2010
+  // Selected collateral helper
+  const selectedCollateral = collateralOptions.find((c) => c.value === formData.collateralType);
+
+  // Year options list dynamically tailored to selected collateral type
   const currentYear = new Date().getFullYear();
-  const yearOptions = Array.from({ length: currentYear - 2010 + 1 }, (_, i) => currentYear - i);
+  const yearOptions = useMemo(() => {
+    const min = selectedCollateral ? selectedCollateral.minYear : 2010;
+    const list: string[] = [];
+    for (let y = currentYear; y >= min; y--) {
+      list.push(y.toString());
+    }
+    // Also add option for older years with disclaimer
+    if (min > 2010) {
+      for (let y = min - 1; y >= 2010; y--) {
+        list.push(`${y} (Perlu Review Khusus)`);
+      }
+    }
+    return list;
+  }, [selectedCollateral, currentYear]);
 
   // Validation check for vehicle year according to collateral type
-  const selectedCollateral = collateralOptions.find((c) => c.value === formData.collateralType);
+  const parsedSelectedYear = parseInt(formData.vehicleYear);
   const isBelowCriteria =
     selectedCollateral &&
     formData.vehicleYear &&
-    parseInt(formData.vehicleYear) < selectedCollateral.minYear;
+    !isNaN(parsedSelectedYear) &&
+    parsedSelectedYear < selectedCollateral.minYear;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -184,27 +221,60 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
           />
         </div>
 
+        {/* Kriteria Tahun Resmi Badges */}
+        <div className="p-3 bg-[#FAF9F6] rounded-2xl border border-stone-200/80 space-y-1.5">
+          <div className="text-[11px] font-bold text-stone-500 uppercase tracking-wider flex items-center justify-between">
+            <span>Standar Minimal Tahun Kendaraan:</span>
+            <span className="text-[10px] text-amber-700 font-semibold bg-amber-50 px-2 py-0.5 rounded border border-amber-200">Mitra AXI</span>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 text-xs">
+            <div className="bg-white p-2 rounded-xl border border-stone-200/70 text-center">
+              <span className="text-stone-500 block text-[10px]">Motor</span>
+              <span className="font-bold text-stone-900">Mulai 2017</span>
+            </div>
+            <div className="bg-white p-2 rounded-xl border border-stone-200/70 text-center">
+              <span className="text-stone-500 block text-[10px]">Mobil</span>
+              <span className="font-bold text-stone-900">Mulai 2010</span>
+            </div>
+            <div className="bg-white p-2 rounded-xl border border-stone-200/70 text-center">
+              <span className="text-stone-500 block text-[10px]">Truk</span>
+              <span className="font-bold text-stone-900">Mulai 2019</span>
+            </div>
+            <div className="bg-white p-2 rounded-xl border border-stone-200/70 text-center">
+              <span className="text-stone-500 block text-[10px]">Pickup</span>
+              <span className="font-bold text-stone-900">Mulai 2019</span>
+            </div>
+          </div>
+        </div>
+
         {/* 3. Row Jaminan & Tahun Kendaraan */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
           {/* Jaminan */}
           <div className="space-y-1.5">
             <label className="flex items-center gap-2 text-sm font-bold text-stone-900">
               <Car className="w-4 h-4 text-amber-600 shrink-0" />
-              <span>Jaminan</span>
+              <span>Jaminan BPKB</span>
             </label>
             <div className="relative">
               <select
                 required
                 value={formData.collateralType}
-                onChange={(e) => setFormData({ ...formData, collateralType: e.target.value })}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setFormData((prev) => ({
+                    ...prev,
+                    collateralType: val,
+                    vehicleYear: '', // reset selected year on collateral change
+                  }));
+                }}
                 className="w-full px-4 py-3 text-sm bg-white border border-stone-200/90 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 text-stone-900 appearance-none shadow-2xs cursor-pointer transition-all"
               >
                 <option value="" disabled className="text-stone-400">
-                  Pilih Jaminan
+                  Pilih Jenis Jaminan
                 </option>
                 {collateralOptions.map((opt) => (
                   <option key={opt.value} value={opt.value}>
-                    {opt.value}
+                    {opt.label}
                   </option>
                 ))}
               </select>
@@ -230,11 +300,11 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
                 className="w-full px-4 py-3 text-sm bg-white border border-stone-200/90 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 text-stone-900 appearance-none shadow-2xs cursor-pointer transition-all"
               >
                 <option value="" disabled className="text-stone-400">
-                  Pilih Tahun
+                  {selectedCollateral ? `Pilih Tahun (${selectedCollateral.type})` : 'Pilih Jaminan Terlebih Dahulu'}
                 </option>
                 {yearOptions.map((year) => (
-                  <option key={year} value={year.toString()}>
-                    {year}
+                  <option key={year} value={year.split(' ')[0]}>
+                    Tahun {year}
                   </option>
                 ))}
               </select>
@@ -248,11 +318,11 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
         </div>
 
         {/* Optional gentle criteria hint */}
-        {isBelowCriteria && (
-          <div className="flex items-start gap-2 p-2.5 bg-amber-50 rounded-xl border border-amber-200 text-stone-800 text-xs">
+        {isBelowCriteria && selectedCollateral && (
+          <div className="flex items-start gap-2 p-3 bg-amber-50 rounded-xl border border-amber-200 text-stone-800 text-xs">
             <AlertCircle className="w-4 h-4 shrink-0 text-amber-700 mt-0.5" />
             <div>
-              <span className="font-semibold">Catatan:</span> Standar minimal resmi {selectedCollateral.value} adalah tahun {selectedCollateral.minYear}. Unit Anda tetap dapat diproses melalui verifikasi fisik.
+              <span className="font-semibold">Perhatian:</span> Standar minimal resmi {selectedCollateral.value} adalah <strong>tahun {selectedCollateral.minYear}</strong>. Unit kendaraan Anda di bawah standar tahun tetap dapat kami konsultasikan untuk pengecekan kondisi mesin & kelayakan fisik khusus.
             </div>
           </div>
         )}

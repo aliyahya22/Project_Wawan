@@ -570,7 +570,7 @@ export const CmsDashboardView: React.FC = () => {
                     required
                     value={settingsForm.whatsappNumber}
                     onChange={(e) => setSettingsForm({ ...settingsForm, whatsappNumber: e.target.value.replace(/[^0-9]/g, '') })}
-                    placeholder="Contoh: 6281289008899"
+                    placeholder="Contoh: 6285288157752"
                     className="w-full px-3.5 py-2.5 text-xs bg-[#FAF9F6] border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-stone-900 focus:bg-white text-stone-900 font-mono"
                   />
                   <span className="text-[10px] text-stone-400 block">
@@ -587,7 +587,7 @@ export const CmsDashboardView: React.FC = () => {
                     required
                     value={settingsForm.displayPhone}
                     onChange={(e) => setSettingsForm({ ...settingsForm, displayPhone: e.target.value })}
-                    placeholder="Contoh: 0812-8900-8899"
+                    placeholder="Contoh: 0852-8815-7752"
                     className="w-full px-3.5 py-2.5 text-xs bg-[#FAF9F6] border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-stone-900 focus:bg-white text-stone-900"
                   />
                 </div>

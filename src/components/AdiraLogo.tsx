@@ -3,7 +3,7 @@ import React from 'react';
 interface AdiraLogoProps {
   className?: string;
   variant?: 'badge' | 'minimal' | 'white';
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
 export const AdiraLogo: React.FC<AdiraLogoProps> = ({
@@ -12,63 +12,67 @@ export const AdiraLogo: React.FC<AdiraLogoProps> = ({
   size = 'md',
 }) => {
   const heightClass = {
-    sm: 'h-7',
-    md: 'h-9',
-    lg: 'h-12',
+    sm: 'h-8 sm:h-9',
+    md: 'h-10 sm:h-11',
+    lg: 'h-12 sm:h-13',
+    xl: 'h-14 sm:h-16',
   }[size];
 
-  if (variant === 'minimal') {
+  // 1. White Variant (for Dark/Black Backgrounds)
+  if (variant === 'white') {
     return (
       <div className={`inline-flex items-center select-none ${className}`}>
         <svg
-          viewBox="0 0 320 120"
+          viewBox="0 0 340 100"
           className={`${heightClass} w-auto`}
-          fill="none"
           xmlns="http://www.w3.org/2000/svg"
           aria-label="Adira Finance"
         >
-          {/* ADIRA Wordmark */}
-          <g transform="skewX(-14) translate(28, 10)">
-            {/* First A with white arrow notch */}
+          <g transform="skewX(-13) translate(22, 10)">
+            {/* First A with signature notch */}
             <path
-              d="M10 70 L35 0 L65 0 L85 70 L58 70 L52 52 L36 52 L26 70 Z"
-              fill="#18181B"
+              fillRule="evenodd"
+              d="M10 60 L32 0 L58 0 L76 60 L54 60 L48 44 L28 44 L21 60 Z M33 30 L43 30 L38 15 Z"
+              fill="#FFFFFF"
             />
-            {/* White cutting triangle in A */}
-            <polygon points="26,52 48,34 50,52" fill="#FFFFFF" />
+            {/* Signature yellow slice on first A */}
+            <polygon points="12,44 32,32 34,44" fill="#FFCC00" />
 
             {/* D */}
             <path
-              d="M72 0 L108 0 C125 0 138 12 138 35 C138 56 125 70 108 70 L72 70 Z M95 50 L107 50 C114 50 118 45 118 35 C118 25 114 20 107 20 L95 20 Z"
-              fill="#18181B"
+              fillRule="evenodd"
+              d="M72 0 L104 0 C122 0 134 11 134 30 C134 49 122 60 104 60 L72 60 Z M92 44 L102 44 C111 44 115 38 115 30 C115 22 111 16 102 16 L92 16 Z"
+              fill="#FFFFFF"
             />
 
             {/* I */}
-            <path d="M148 0 L170 0 L170 70 L148 70 Z" fill="#18181B" />
+            <path d="M144 0 L164 0 L164 60 L144 60 Z" fill="#FFFFFF" />
 
             {/* R */}
             <path
-              d="M180 0 L216 0 C229 0 238 8 238 23 C238 34 230 41 220 44 L240 70 L214 70 L198 47 L198 70 L176 70 L176 0 Z M198 33 L213 33 C217 33 220 30 220 23 C220 17 217 15 212 15 L198 15 Z"
-              fill="#18181B"
+              fillRule="evenodd"
+              d="M174 0 L208 0 C222 0 230 7 230 20 C230 29 223 36 212 39 L232 60 L208 60 L194 44 L194 60 L174 60 Z M194 28 L204 28 C209 28 212 25 212 20 C212 15 209 13 204 13 L194 13 Z"
+              fill="#FFFFFF"
             />
 
             {/* Second A */}
             <path
-              d="M242 70 L267 0 L297 0 L317 70 L290 70 L284 52 L268 52 L258 70 Z M272 36 L280 36 L276 22 Z"
-              fill="#18181B"
+              fillRule="evenodd"
+              d="M240 60 L262 0 L288 0 L306 60 L284 60 L278 44 L258 44 L251 60 Z M263 30 L273 30 L268 15 Z"
+              fill="#FFFFFF"
             />
           </g>
 
-          {/* FINANCE text */}
+          {/* Subtext FINANCE */}
           <text
-            x="160"
-            y="104"
+            x="170"
+            y="90"
             textAnchor="middle"
-            fill="#18181B"
-            fontSize="21"
+            fill="#FFCC00"
+            fontSize="18"
             fontWeight="900"
             letterSpacing="8"
-            fontFamily="system-ui, -apple-system, sans-serif"
+            fontFamily="Arial Black, Impact, -apple-system, sans-serif"
           >
             FINANCE
           </text>
@@ -77,62 +81,151 @@ export const AdiraLogo: React.FC<AdiraLogoProps> = ({
     );
   }
 
-  // Official Yellow Badge Variant (Matches uploaded image exactly)
+  // 2. Minimal Variant (Transparent background with Black Wordmark & Yellow Accent)
+  if (variant === 'minimal') {
+    return (
+      <div className={`inline-flex items-center select-none ${className}`}>
+        <svg
+          viewBox="0 0 340 100"
+          className={`${heightClass} w-auto`}
+          xmlns="http://www.w3.org/2000/svg"
+          aria-label="Adira Finance"
+        >
+          <g transform="skewX(-13) translate(22, 10)">
+            {/* First A with signature notch */}
+            <path
+              fillRule="evenodd"
+              d="M10 60 L32 0 L58 0 L76 60 L54 60 L48 44 L28 44 L21 60 Z M33 30 L43 30 L38 15 Z"
+              fill="#18181B"
+            />
+            {/* Signature yellow slice on first A */}
+            <polygon points="12,44 32,32 34,44" fill="#FFCC00" />
+
+            {/* D */}
+            <path
+              fillRule="evenodd"
+              d="M72 0 L104 0 C122 0 134 11 134 30 C134 49 122 60 104 60 L72 60 Z M92 44 L102 44 C111 44 115 38 115 30 C115 22 111 16 102 16 L92 16 Z"
+              fill="#18181B"
+            />
+
+            {/* I */}
+            <path d="M144 0 L164 0 L164 60 L144 60 Z" fill="#18181B" />
+
+            {/* R */}
+            <path
+              fillRule="evenodd"
+              d="M174 0 L208 0 C222 0 230 7 230 20 C230 29 223 36 212 39 L232 60 L208 60 L194 44 L194 60 L174 60 Z M194 28 L204 28 C209 28 212 25 212 20 C212 15 209 13 204 13 L194 13 Z"
+              fill="#18181B"
+            />
+
+            {/* Second A */}
+            <path
+              fillRule="evenodd"
+              d="M240 60 L262 0 L288 0 L306 60 L284 60 L278 44 L258 44 L251 60 Z M263 30 L273 30 L268 15 Z"
+              fill="#18181B"
+            />
+          </g>
+
+          {/* Subtext FINANCE */}
+          <text
+            x="170"
+            y="90"
+            textAnchor="middle"
+            fill="#18181B"
+            fontSize="18"
+            fontWeight="900"
+            letterSpacing="8"
+            fontFamily="Arial Black, Impact, -apple-system, sans-serif"
+          >
+            FINANCE
+          </text>
+        </svg>
+      </div>
+    );
+  }
+
+  // 3. Official Yellow Badge Variant (Authentic Adira Finance Signature Rounded Yellow Badge)
   return (
     <div className={`inline-flex items-center select-none ${className}`}>
       <svg
-        viewBox="0 0 360 140"
+        viewBox="0 0 360 115"
         className={`${heightClass} w-auto drop-shadow-xs`}
         xmlns="http://www.w3.org/2000/svg"
         aria-label="Adira Finance Logo"
       >
-        {/* Adira Signature Yellow Background Badge */}
-        <rect width="360" height="140" rx="8" fill="#FFCC00" />
+        <defs>
+          <linearGradient id="adiraYellowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#FFD200" />
+            <stop offset="100%" stopColor="#FFC400" />
+          </linearGradient>
+        </defs>
 
-        {/* Slanted ADIRA text */}
-        <g transform="skewX(-13) translate(38, 16)">
-          {/* Letter A with white notch */}
+        {/* Adira Signature Vibrant Golden Yellow Rounded Badge */}
+        <rect width="360" height="115" rx="12" fill="url(#adiraYellowGrad)" />
+
+        {/* Slanted ADIRA text with proper optical alignment */}
+        <g transform="skewX(-13) translate(34, 14)">
+          {/* Letter A with signature yellow notch slice */}
           <path
-            d="M8 72 L36 0 L66 0 L86 72 L58 72 L52 52 L34 52 L24 72 Z"
-            fill="#111827"
+            fillRule="evenodd"
+            d="M10 58 L32 0 L58 0 L76 58 L54 58 L48 42 L28 42 L22 58 Z M33 28 L43 28 L38 14 Z"
+            fill="#18181B"
           />
-          {/* Crisp arrow notch in first A */}
-          <polygon points="24,52 49,33 51,52" fill="#FFFFFF" />
+          {/* Authentic notch slice in first A that matches background yellow */}
+          <polygon points="12,42 32,30 35,42" fill="#FFC400" />
 
           {/* Letter D */}
           <path
-            d="M74 0 L110 0 C128 0 140 12 140 36 C140 58 127 72 109 72 L74 72 Z M96 52 L108 52 C116 52 120 46 120 36 C120 26 116 20 108 20 L96 20 Z"
-            fill="#111827"
+            fillRule="evenodd"
+            d="M72 0 L104 0 C122 0 134 11 134 29 C134 47 122 58 104 58 L72 58 Z M92 42 L102 42 C111 42 115 36 115 29 C115 22 111 16 102 16 L92 16 Z"
+            fill="#18181B"
           />
 
           {/* Letter I */}
-          <path d="M150 0 L172 0 L172 72 L150 72 Z" fill="#111827" />
+          <path d="M144 0 L164 0 L164 58 L144 58 Z" fill="#18181B" />
 
           {/* Letter R */}
           <path
-            d="M182 0 L219 0 C233 0 242 8 242 23 C242 34 233 42 222 45 L244 72 L216 72 L200 48 L200 72 L178 72 L178 0 Z M200 34 L215 34 C220 34 223 30 223 23 C223 17 220 15 214 15 L200 15 Z"
-            fill="#111827"
+            fillRule="evenodd"
+            d="M174 0 L208 0 C222 0 230 7 230 19 C230 28 223 35 212 38 L232 58 L208 58 L194 42 L194 58 L174 58 Z M194 27 L204 27 C209 27 212 24 212 19 C212 14 209 13 204 13 L194 13 Z"
+            fill="#18181B"
           />
 
-          {/* Letter A */}
+          {/* Second Letter A */}
           <path
-            d="M245 72 L271 0 L301 0 L321 72 L293 72 L287 52 L271 52 L261 72 Z M276 35 L282 35 L279 20 Z"
-            fill="#111827"
+            fillRule="evenodd"
+            d="M240 58 L262 0 L288 0 L306 58 L284 58 L278 42 L258 42 L252 58 Z M263 28 L273 28 L268 14 Z"
+            fill="#18181B"
           />
         </g>
 
         {/* FINANCE Subtext */}
         <text
           x="180"
-          y="114"
+          y="95"
           textAnchor="middle"
-          fill="#111827"
-          fontSize="22"
+          fill="#18181B"
+          fontSize="20"
           fontWeight="900"
           letterSpacing="9"
-          fontFamily="system-ui, -apple-system, sans-serif"
+          fontFamily="Arial Black, Impact, -apple-system, sans-serif"
         >
           FINANCE
+        </text>
+
+        {/* Subtitle endorsement: a Danamon company */}
+        <text
+          x="180"
+          y="108"
+          textAnchor="middle"
+          fill="#3F3F46"
+          fontSize="9"
+          fontWeight="600"
+          letterSpacing="1"
+          fontFamily="system-ui, -apple-system, sans-serif"
+          fontStyle="italic"
+        >
+          a Danamon company · Mitra Resmi AXI
         </text>
       </svg>
     </div>

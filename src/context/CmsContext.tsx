@@ -92,19 +92,40 @@ interface CmsContextType {
 const CmsContext = createContext<CmsContextType | undefined>(undefined);
 
 const STORAGE_KEYS = {
-  SETTINGS: 'adira_cms_settings_v2',
-  SUBMISSIONS: 'adira_cms_submissions_v2',
-  ARTICLES: 'adira_cms_articles_v2',
-  CRITERIA: 'adira_cms_criteria_v2',
-  AUTH: 'adira_cms_auth_session_v2',
+  SETTINGS: 'adira_cms_settings_v7',
+  SUBMISSIONS: 'adira_cms_submissions_v7',
+  ARTICLES: 'adira_cms_articles_v7',
+  CRITERIA: 'adira_cms_criteria_v7',
+  AUTH: 'adira_cms_auth_session_v7',
 };
 
 export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // Purge legacy storage keys from previous builds
+  try {
+    const obsoleteKeys = [
+      'adira_cms_settings_v1', 'adira_cms_settings_v2', 'adira_cms_settings_v3', 'adira_cms_settings_v4', 'adira_cms_settings_v5', 'adira_cms_settings_v6',
+      'adira_cms_criteria_v1', 'adira_cms_criteria_v2', 'adira_cms_criteria_v3', 'adira_cms_criteria_v4', 'adira_cms_criteria_v5', 'adira_cms_criteria_v6',
+      'adira_cms_submissions_v1', 'adira_cms_submissions_v2', 'adira_cms_submissions_v3', 'adira_cms_submissions_v4',
+    ];
+    obsoleteKeys.forEach((k) => {
+      try { localStorage.removeItem(k); } catch {}
+    });
+  } catch {}
+
   // 1. Settings state
   const [settings, setSettings] = useState<CmsSettings>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.SETTINGS);
-      return saved ? { ...DEFAULT_SETTINGS, ...JSON.parse(saved) } : DEFAULT_SETTINGS;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        return {
+          ...DEFAULT_SETTINGS,
+          ...parsed,
+          whatsappNumber: OFFICIAL_WHATSAPP, // Always ensure revised 0852-8815-7752 / 6285288157752
+          displayPhone: DISPLAY_PHONE,
+        };
+      }
+      return DEFAULT_SETTINGS;
     } catch {
       return DEFAULT_SETTINGS;
     }
@@ -130,11 +151,22 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
   });
 
-  // 4. Vehicle Criteria state
+  // 4. Vehicle Criteria state - Guaranteed exact criteria: Motor 2017, Mobil 2010, Truk 2019, Pickup 2019
   const [vehicleCriteria, setVehicleCriteria] = useState<Record<string, VehicleRequirement>>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.CRITERIA);
-      return saved ? JSON.parse(saved) : VEHICLE_CRITERIA;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        return {
+          ...VEHICLE_CRITERIA,
+          ...parsed,
+          motor: { ...VEHICLE_CRITERIA.motor, ...(parsed.motor || {}), minYear: 2017 },
+          mobil: { ...VEHICLE_CRITERIA.mobil, ...(parsed.mobil || {}), minYear: 2010 },
+          truck: { ...VEHICLE_CRITERIA.truck, ...(parsed.truck || {}), minYear: 2019 },
+          pickup: { ...VEHICLE_CRITERIA.pickup, ...(parsed.pickup || {}), minYear: 2019 },
+        };
+      }
+      return VEHICLE_CRITERIA;
     } catch {
       return VEHICLE_CRITERIA;
     }

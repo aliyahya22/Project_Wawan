@@ -1,7 +1,7 @@
 import { VehicleRequirement, Branch, Article } from '../types';
 
-export const OFFICIAL_WHATSAPP = '6281289008899';
-export const DISPLAY_PHONE = '0812-8900-8899';
+export const OFFICIAL_WHATSAPP = '6285288157752';
+export const DISPLAY_PHONE = '0852-8815-7752';
 export const OFFICE_ADDRESS = {
   headquarters: 'Gedung Menara AXI Lantai 5, Jl. Jend. Sudirman Kav. 52-53, Senayan, Kebayoran Baru, Jakarta Selatan 12190',
   operationalOffice: 'Sentra Pembiayaan Otomotif BPKB Mitra AXI, Ruko Mega Boulevard Blok C1 No. 8, Harapan Indah, Bekasi Barat 17131',
@@ -13,12 +13,12 @@ export const VEHICLE_CRITERIA: Record<string, VehicleRequirement> = {
   motor: {
     type: 'motor',
     title: 'Gadai BPKB Motor',
-    minYear: 2016,
+    minYear: 2017,
     maxTenorMonths: 36,
     maxPlafondMillion: 50,
     interestRatePerMonth: 0.99,
     popularModels: ['Honda Vario, Beat, PCX, ADV', 'Yamaha NMAX, Aerox, Scoopy', 'Kawasaki Ninja, KLX', 'Vespa Primavera, Sprint'],
-    description: 'Pencairan dana cepat untuk kendaraan roda dua segala merk Jepang dan Italia mulai tahun 2016 ke atas.'
+    description: 'Pencairan dana cepat untuk kendaraan roda dua segala merk Jepang dan Italia mulai tahun 2017 ke atas.'
   },
   mobil: {
     type: 'mobil',
@@ -33,22 +33,22 @@ export const VEHICLE_CRITERIA: Record<string, VehicleRequirement> = {
   truck: {
     type: 'truck',
     title: 'Gadai BPKB Truk',
-    minYear: 2018,
+    minYear: 2019,
     maxTenorMonths: 48,
     maxPlafondMillion: 800,
     interestRatePerMonth: 0.85,
     popularModels: ['Mitsubishi Colt Diesel (Canter), Fuso', 'Hino Dutro, Ranger', 'Isuzu Elf (NMR, GIGA)'],
-    description: 'Dukungan likuiditas modal kerja dan ekspansi logistik armada truk roda 4 hingga roda 6 mulai tahun 2018.'
+    description: 'Dukungan likuiditas modal kerja dan ekspansi logistik armada truk roda 4 hingga roda 6 mulai tahun 2019.'
   },
   pickup: {
     type: 'pickup',
     title: 'Gadai BPKB Pickup',
-    minYear: 2021,
+    minYear: 2019,
     maxTenorMonths: 48,
     maxPlafondMillion: 150,
     interestRatePerMonth: 0.82,
     popularModels: ['Suzuki New Carry Pick Up', 'Daihatsu Gran Max PU', 'Mitsubishi L300 Euro 4', 'Isuzu Traga'],
-    description: 'Pencairan modal usaha harian khusus armada niaga ringan pickup produktif dengan usia unit segar (minimal 2021).'
+    description: 'Pencairan modal usaha harian khusus armada niaga ringan pickup produktif mulai tahun 2019.'
   }
 };
 
@@ -60,7 +60,7 @@ export const BRANCHES_DATA: Branch[] = [
     province: 'DKI Jakarta',
     address: 'Jl. RS. Fatmawati Raya No. 45B, Cilandak, Jakarta Selatan',
     phone: '021-75912340',
-    whatsapp: '6281289008899',
+    whatsapp: '6285288157752',
     hours: 'Senin - Sabtu: 08:30 - 17:00 WIB',
     coordinates: { lat: -6.2954, lng: 106.7963 }
   },
@@ -71,7 +71,7 @@ export const BRANCHES_DATA: Branch[] = [
     province: 'DKI Jakarta',
     address: 'Jl. Pemuda No. 72, Rawamangun, Pulo Gadung, Jakarta Timur',
     phone: '021-47863211',
-    whatsapp: '6281289008899',
+    whatsapp: '6285288157752',
     hours: 'Senin - Sabtu: 08:30 - 17:00 WIB',
     coordinates: { lat: -6.1952, lng: 106.8837 }
   },
@@ -82,7 +82,7 @@ export const BRANCHES_DATA: Branch[] = [
     province: 'DKI Jakarta',
     address: 'Komp. Rukan Puri Niaga II Blok J1 No. 3, Kembangan, Jakarta Barat',
     phone: '021-58301122',
-    whatsapp: '6281289008899',
+    whatsapp: '6285288157752',
     hours: 'Senin - Sabtu: 08:30 - 17:00 WIB',
     coordinates: { lat: -6.1873, lng: 106.7495 }
   },
@@ -93,7 +93,7 @@ export const BRANCHES_DATA: Branch[] = [
     province: 'Jawa Barat',
     address: 'Jl. Ir. H. Juanda No. 182, Margahayu, Bekasi Timur, Kota Bekasi',
     phone: '021-88349012',
-    whatsapp: '6281289008899',
+    whatsapp: '6285288157752',
     hours: 'Senin - Sabtu: 08:30 - 17:00 WIB',
     coordinates: { lat: -6.2415, lng: 106.9924 }
   },
@@ -104,7 +104,7 @@ export const BRANCHES_DATA: Branch[] = [
     province: 'Banten',
     address: 'Ruko Tol Boulevard Blok B No. 12, Jl. Pahlawan Seribu, BSD City, Tangsel',
     phone: '021-5378899',
-    whatsapp: '6281289008899',
+    whatsapp: '6285288157752',
     hours: 'Senin - Sabtu: 08:30 - 17:00 WIB',
     coordinates: { lat: -6.3015, lng: 106.6698 }
   },
@@ -115,7 +115,7 @@ export const BRANCHES_DATA: Branch[] = [
     province: 'Jawa Barat',
     address: 'Jl. Soekarno-Hatta No. 471, Batununggal, Bandung',
     phone: '022-7319988',
-    whatsapp: '6281289008899',
+    whatsapp: '6285288157752',
     hours: 'Senin - Sabtu: 08:30 - 17:00 WIB',
     coordinates: { lat: -6.9427, lng: 107.6321 }
   },
@@ -126,7 +126,7 @@ export const BRANCHES_DATA: Branch[] = [
     province: 'Jawa Tengah',
     address: 'Jl. Pandanaran No. 88, Mugassari, Semarang Selatan',
     phone: '024-8412300',
-    whatsapp: '6281289008899',
+    whatsapp: '6285288157752',
     hours: 'Senin - Sabtu: 08:30 - 17:00 WIB',
     coordinates: { lat: -6.9897, lng: 110.4208 }
   },
@@ -137,7 +137,7 @@ export const BRANCHES_DATA: Branch[] = [
     province: 'Jawa Timur',
     address: 'Jl. Mayjen Sungkono No. 102, Dukuh Pakis, Surabaya',
     phone: '031-5674321',
-    whatsapp: '6281289008899',
+    whatsapp: '6285288157752',
     hours: 'Senin - Sabtu: 08:30 - 17:00 WIB',
     coordinates: { lat: -7.2912, lng: 112.7156 }
   },
@@ -148,7 +148,7 @@ export const BRANCHES_DATA: Branch[] = [
     province: 'Sumatera Utara',
     address: 'Jl. Gatot Subroto KM 4.5 No. 120, Sei Sikambing D, Medan',
     phone: '061-4521098',
-    whatsapp: '6281289008899',
+    whatsapp: '6285288157752',
     hours: 'Senin - Sabtu: 08:30 - 17:00 WIB',
     coordinates: { lat: 3.5852, lng: 98.6504 }
   },
@@ -159,7 +159,7 @@ export const BRANCHES_DATA: Branch[] = [
     province: 'Sulawesi Selatan',
     address: 'Jl. A. P. Pettarani No. 56, Tamamaung, Panakkukang, Makassar',
     phone: '0411-456789',
-    whatsapp: '6281289008899',
+    whatsapp: '6285288157752',
     hours: 'Senin - Sabtu: 08:30 - 17:00 WITA',
     coordinates: { lat: -5.1486, lng: 119.4328 }
   },
@@ -170,7 +170,7 @@ export const BRANCHES_DATA: Branch[] = [
     province: 'Bali',
     address: 'Jl. Sunset Road No. 88X, Kuta, Badung, Bali',
     phone: '0361-765432',
-    whatsapp: '6281289008899',
+    whatsapp: '6285288157752',
     hours: 'Senin - Sabtu: 08:30 - 17:00 WITA',
     coordinates: { lat: -8.7052, lng: 115.1822 }
   }
@@ -186,7 +186,7 @@ export const ARTICLES_DATA: Article[] = [
     readTime: '4 menit baca',
     content: [
       'Gadai BPKB kendaraan merupakan salah satu instrumen pinjaman dana tunai paling efisien ketika membutuhkan likuiditas cepat dengan nominal yang fleksibel.',
-      'Kriteria tahun kendaraan adalah filter pertama yang wajib diperhatikan: Motor minimal keluaran 2016, Mobil minimal 2010, Truk minimal 2018, dan Pickup minimal 2021. Kendaraan di bawah tahun tersebut memerlukan peninjauan khusus kondisi fisik mesin.',
+      'Kriteria tahun kendaraan adalah filter pertama yang wajib diperhatikan: Motor minimal keluaran 2017, Mobil minimal 2010, Truk minimal 2019, dan Pickup minimal 2019. Kendaraan di bawah tahun tersebut memerlukan peninjauan khusus kondisi fisik mesin.',
       'Kelengkapan berkas identitas (KTP pemohon & pasangan, Kartu Keluarga) serta bukti kepemilikan (STNK aktif, BPKB asli, dan faktur pembelian) menjamin validasi data selesai kurang dari 2 jam.',
       'Setelah survei fisik nomor rangka dan nomor mesin, perjanjian kredit ditandatangani dan dana langsung ditransfer utuh ke rekening bank Anda tanpa potongan liar.'
     ]

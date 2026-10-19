@@ -8,29 +8,21 @@ import {
   CheckCircle2,
   ShieldCheck,
   FileText,
-  BadgeCheck
+  BadgeCheck,
+  Clock,
+  Sparkles
 } from 'lucide-react';
 import { AdiraLogo } from './AdiraLogo';
-import { ApplicationForm } from './ApplicationForm';
 
 interface TakeOverViewProps {
   onOpenApplication: (service?: 'Take Over') => void;
 }
 
 export const TakeOverView: React.FC<TakeOverViewProps> = ({ onOpenApplication }) => {
-  const scrollToForm = () => {
-    const el = document.getElementById('takeover-form-section');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      onOpenApplication('Take Over');
-    }
-  };
-
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
       
-      {/* BENTO ROW 1: HEADER & DIRECT APPLICATION FORM */}
+      {/* BENTO ROW 1: HEADER & KEUNTUNGAN TAKE OVER (FORM DIARAHKAN KE BERANDA) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
         
         {/* Bento Overview Card (7 Cols) */}
@@ -73,31 +65,70 @@ export const TakeOverView: React.FC<TakeOverViewProps> = ({ onOpenApplication })
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
             <button
               type="button"
-              onClick={scrollToForm}
+              onClick={() => onOpenApplication('Take Over')}
               className="px-6 py-3.5 bg-[#FFCC00] hover:bg-[#F5C400] text-stone-950 font-bold text-xs rounded-xl shadow-xs transition-colors flex items-center justify-center gap-2 cursor-pointer"
             >
-              <span>Ajukan Take Over Sekarang</span>
+              <span>Ajukan Take Over (Kirim Formulir)</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 
             <button
               type="button"
               onClick={() => openWhatsAppGeneral('Take Over BPKB Kendaraan')}
-              className="px-5 py-3.5 bg-[#FAF9F6] hover:bg-stone-100 border border-stone-200 text-stone-800 font-semibold text-xs rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer"
+              className="px-5 py-3.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-950 font-bold text-xs rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer"
             >
               <MessageCircle className="w-4 h-4 text-emerald-700" />
-              <span>Konsultasi Take Over via WA</span>
+              <span>WhatsApp: 0852-8815-7752</span>
             </button>
           </div>
         </div>
 
-        {/* Bento Form Card (5 Cols) */}
-        <div id="takeover-form-section" className="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 border border-stone-200/90 shadow-2xs flex flex-col justify-center">
-          <ApplicationForm
-            isEmbedded={true}
-            initialCollateral="BPKB Mobil"
-            showTitle={true}
-          />
+        {/* Bento Card: Keunggulan Layanan Take Over (5 Cols - Pengganti Form) */}
+        <div className="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 border border-stone-200/90 shadow-2xs flex flex-col justify-between space-y-5">
+          <div className="space-y-3">
+            <div className="flex items-center gap-2 text-stone-900 font-bold text-sm">
+              <Sparkles className="w-4 h-4 text-amber-500" />
+              <span>Keistimewaan Take Over AXI Adira</span>
+            </div>
+            <p className="text-xs text-stone-500 leading-relaxed">
+              Pelunasan tempat lama kami dampingi langsung secara legal dan aman.
+            </p>
+          </div>
+
+          <div className="space-y-3 text-xs text-stone-700">
+            <div className="flex items-start gap-3 p-3 bg-[#FAF9F6] rounded-2xl border border-stone-200/80">
+              <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+              <div>
+                <span className="font-bold text-stone-900 block">Pelunasan Leasing Lama Didampingi</span>
+                <span className="text-stone-500 text-[11px]">Tim resmi mendampingi penebusan BPKB di tempat lama tanpa risiko.</span>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 p-3 bg-[#FAF9F6] rounded-2xl border border-stone-200/80">
+              <Clock className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+              <div>
+                <span className="font-bold text-stone-900 block">Jangka Waktu Cicilan Baru</span>
+                <span className="text-stone-500 text-[11px]">Tenor diperpanjang hingga 60 bulan agar cicilan per bulan lebih enteng.</span>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 p-3 bg-[#FAF9F6] rounded-2xl border border-stone-200/80">
+              <Banknote className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+              <div>
+                <span className="font-bold text-stone-900 block">Sisa Dana Langsung Cair</span>
+                <span className="text-stone-500 text-[11px]">Sisa dana bersih setelah pelunasan ditransfer langsung ke rekening Anda.</span>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => onOpenApplication('Take Over')}
+            className="w-full py-3 px-4 bg-stone-900 hover:bg-stone-800 text-white font-semibold text-xs rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <span>Kirim Formulir Pengajuan di Beranda</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
         </div>
 
       </div>
@@ -166,10 +197,10 @@ export const TakeOverView: React.FC<TakeOverViewProps> = ({ onOpenApplication })
             <BadgeCheck className="w-4 h-4 text-amber-700" />
           </div>
           <h3 className="text-sm font-bold text-stone-900 tracking-tight">
-            Konsultasi Audit Cicilan Gratis
+            Konsultasi Rincian Cicilan Gratis
           </h3>
           <p className="text-xs text-stone-600 leading-relaxed">
-            Kirimkan rincian angsuran lama Anda ke staf kami untuk dihitung apakah take over akan menghemat pengeluaran bulanan Anda.
+            Kirimkan rincian angsuran lama Anda ke staf kami untuk ditelaah apakah take over akan menghemat pengeluaran bulanan Anda.
           </p>
         </div>
 
@@ -178,10 +209,10 @@ export const TakeOverView: React.FC<TakeOverViewProps> = ({ onOpenApplication })
             <ShieldCheck className="w-4 h-4 text-stone-900" />
           </div>
           <h3 className="text-sm font-bold text-stone-900 tracking-tight">
-            Didampingi Staf Resmi
+            Proses Bersih & Legal
           </h3>
           <p className="text-xs text-stone-600 leading-relaxed">
-            Anda tidak perlu repot mengurus administrasi ke leasing lama seorang diri; konsultan kami siap mengawal prosesnya hingga tuntas.
+            Semua tahapan pelunasan dan serah terima dokumen dilakukan secara transparan dengan tanda terima resmi berbadan hukum.
           </p>
         </div>
 
@@ -190,10 +221,10 @@ export const TakeOverView: React.FC<TakeOverViewProps> = ({ onOpenApplication })
             <FileText className="w-4 h-4 text-emerald-700" />
           </div>
           <h3 className="text-sm font-bold text-stone-900 tracking-tight">
-            Transparansi Pelunasan
+            Syarat Sederhana
           </h3>
           <p className="text-xs text-stone-600 leading-relaxed">
-            Semua angka pelunasan, sisa dana lebihan, dan jadwal angsuran baru dicatat secara transparan tanpa ada pungutan tak resmi.
+            Cukup siapkan KTP, Kartu Keluarga, bukti pembayaran cicilan terakhir, dan fotokopi STNK kendaraan Anda.
           </p>
         </div>
       </div>

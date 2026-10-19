@@ -3,7 +3,6 @@ import { ActivePage, VehicleType } from './types';
 import { Navbar } from './components/Navbar';
 import { Sidebar } from './components/Sidebar';
 import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton';
-import { ApplicationModal } from './components/ApplicationModal';
 import { BerandaView } from './components/BerandaView';
 import { DanaTunaiView } from './components/DanaTunaiView';
 import { TakeOverView } from './components/TakeOverView';
@@ -21,9 +20,6 @@ function MainAppContent() {
   const { isCmsView, isAuthenticated, openCms } = useCms();
   const [activePage, setActivePage] = useState<ActivePage>('beranda');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isAppModalOpen, setIsAppModalOpen] = useState(false);
-  const [selectedVehicleType, setSelectedVehicleType] = useState<VehicleType>('mobil');
-  const [selectedServiceType, setSelectedServiceType] = useState<'Dana Tunai' | 'Take Over' | 'Top Up'>('Dana Tunai');
   const [legalModalType, setLegalModalType] = useState<'syarat' | 'privasi' | null>(null);
 
   // Hidden discrete keyboard shortcut to access CMS portal: Ctrl + Shift + A (or Cmd + Shift + A)
@@ -52,10 +48,17 @@ function MainAppContent() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleOpenApplication = (vehicleType?: VehicleType, serviceType: 'Dana Tunai' | 'Take Over' | 'Top Up' = 'Dana Tunai') => {
-    if (vehicleType) setSelectedVehicleType(vehicleType);
-    setSelectedServiceType(serviceType);
-    setIsAppModalOpen(true);
+  // Navigates directly to the single application form on Beranda
+  const handleOpenApplication = (_vehicleType?: VehicleType, _serviceType?: 'Dana Tunai' | 'Take Over' | 'Top Up') => {
+    setActivePage('beranda');
+    setTimeout(() => {
+      const el = document.getElementById('formulir-pengajuan-section');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.scrollTo({ top: 400, behavior: 'smooth' });
+      }
+    }, 120);
   };
 
   return (
@@ -126,14 +129,6 @@ function MainAppContent() {
 
       {/* Floating WhatsApp CTA Button */}
       <WhatsAppFloatingButton />
-
-      {/* Interactive Application Modal */}
-      <ApplicationModal
-        isOpen={isAppModalOpen}
-        onClose={() => setIsAppModalOpen(false)}
-        initialVehicleType={selectedVehicleType}
-        initialServiceType={selectedServiceType}
-      />
 
       {/* Legal & Compliance Modal */}
       <LegalModal
