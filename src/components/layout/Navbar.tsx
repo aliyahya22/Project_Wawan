@@ -30,15 +30,15 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header className="sticky top-0 z-40 bg-[#FAF9F6]/95 backdrop-blur-md border-b border-stone-200/80 transition-colors">
       {/* Primary Top Bar */}
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-15 sm:h-18 flex items-center justify-between gap-2 sm:gap-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-15 sm:h-18 flex items-center justify-between gap-3 sm:gap-4">
         
         {/* Zone 1: Brand title & Official Adira Logo */}
-        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0 min-w-0">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0 min-w-0">
           <button
             type="button"
             onClick={onToggleSidebar}
             aria-label="Buka menu navigasi"
-            className="lg:hidden p-1.5 rounded-lg text-stone-600 hover:bg-stone-100 transition-colors focus:outline-none shrink-0 cursor-pointer"
+            className="lg:hidden p-2 rounded-xl text-stone-700 hover:bg-stone-100 transition-colors focus:outline-none shrink-0 cursor-pointer"
           >
             <Menu className="w-5 h-5" />
           </button>
@@ -90,23 +90,24 @@ export const Navbar: React.FC<NavbarProps> = ({
           })}
         </nav>
 
-        {/* Zone 3: Clean Actions (Hubungi Kami via WhatsApp + Primary CTA) */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-          {/* WhatsApp CTA with 'Hubungi Kami' text */}
+        {/* Zone 3: Clean Actions (Only Ajukan BPKB on HP, Hubungi Kami visible on Desktop) */}
+        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+          {/* WhatsApp CTA with 'Hubungi Kami' text (hidden on HP / mobile, only on desktop) */}
           <button
             type="button"
             onClick={() => openWhatsAppGeneral('Pengajuan Cepat Navbar')}
-            className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 rounded-xl transition-all whitespace-nowrap shrink-0 cursor-pointer shadow-2xs hover:shadow-xs"
+            className="hidden lg:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 rounded-xl transition-all whitespace-nowrap shrink-0 cursor-pointer shadow-2xs hover:shadow-xs"
             title="Hubungi Kami via WhatsApp: 0852-8815-7752"
           >
-            <MessageCircle className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-emerald-700 shrink-0" />
+            <MessageCircle className="w-4 h-4 text-emerald-700 shrink-0" />
             <span className="font-bold">Hubungi Kami</span>
           </button>
 
+          {/* Primary Action Button (Ajukan BPKB - Clean, prominent on both HP and desktop) */}
           <button
             type="button"
             onClick={onOpenApplication}
-            className="px-2.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold text-stone-950 bg-[#FFCC00] hover:bg-[#F5C400] active:bg-[#E6B800] rounded-xl transition-all whitespace-nowrap shrink-0 shadow-xs hover:shadow-sm cursor-pointer"
+            className="px-3.5 sm:px-4 py-1.5 sm:py-2 text-xs font-bold text-stone-950 bg-[#FFCC00] hover:bg-[#F5C400] active:bg-[#E6B800] rounded-xl transition-all whitespace-nowrap shrink-0 shadow-xs hover:shadow-sm cursor-pointer"
           >
             Ajukan BPKB
           </button>
@@ -116,7 +117,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Horizontal Overflow Navigation (Swipeable touch navigation bar for HP) */}
       <div className="lg:hidden border-t border-stone-200/60 bg-[#FAF9F6] overflow-x-auto no-scrollbar scroll-smooth">
-        <div className="flex items-center gap-1.5 px-3 py-2 min-w-max">
+        <div className="flex items-center gap-2 px-3 py-2 min-w-max">
           {navLinks.map((link) => {
             const isActive = activePage === link.id;
             return (
@@ -124,10 +125,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 key={link.id}
                 type="button"
                 onClick={() => onNavigate(link.id)}
-                className={`whitespace-nowrap px-3 py-1 rounded-full text-xs transition-all shrink-0 cursor-pointer flex items-center gap-1 ${
+                className={`whitespace-nowrap px-3.5 py-1.5 rounded-full text-xs transition-all shrink-0 cursor-pointer flex items-center gap-1.5 ${
                   isActive
-                    ? 'bg-[#FFCC00] text-stone-950 font-bold shadow-2xs'
-                    : 'text-stone-600 hover:text-stone-950 bg-stone-100/90 font-medium'
+                    ? 'bg-[#FFCC00] text-stone-950 font-extrabold shadow-2xs'
+                    : 'text-stone-700 hover:text-stone-950 bg-white border border-stone-200/80 font-medium active:bg-stone-100'
                 }`}
               >
                 <span>{link.label}</span>
