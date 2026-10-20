@@ -1,6 +1,6 @@
 import React from 'react';
-import { ActivePage, VehicleType } from '../types';
-import { openWhatsAppGeneral } from '../utils/whatsapp';
+import { ActivePage, VehicleType } from '../../types';
+import { openWhatsAppGeneral } from '../../utils/whatsapp';
 import { 
   Clock, 
   ArrowRight, 
@@ -14,8 +14,8 @@ import {
   FileCheck2,
   PhoneCall
 } from 'lucide-react';
-import { AdiraLogo } from './AdiraLogo';
-import { ApplicationForm } from './ApplicationForm';
+import { AdiraLogo } from '../common/AdiraLogo';
+import { ApplicationForm } from '../common/ApplicationForm';
 
 interface BerandaViewProps {
   onNavigate: (page: ActivePage) => void;
@@ -106,14 +106,7 @@ export const BerandaView: React.FC<BerandaViewProps> = ({
               <span>WhatsApp: 0852-8815-7752</span>
             </button>
 
-            <a
-              href="tel:085288157752"
-              className="px-4 py-3.5 bg-[#FAF9F6] hover:bg-stone-100 border border-stone-200 text-stone-800 font-bold text-xs rounded-xl transition-colors flex items-center justify-center gap-2"
-              title="Hubungi Telepon Langsung"
-            >
-              <PhoneCall className="w-4 h-4 text-stone-700" />
-              <span>0852-8815-7752</span>
-            </a>
+
           </div>
 
           {/* Subtext */}
@@ -403,14 +396,7 @@ export const BerandaView: React.FC<BerandaViewProps> = ({
         </div>
 
         <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full md:w-auto">
-          <a
-            href="tel:085288157752"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-white/10 hover:bg-white/15 text-white font-bold text-xs rounded-xl transition-colors border border-white/20"
-            title="Hubungi Telepon Langsung"
-          >
-            <PhoneCall className="w-4 h-4 text-amber-300" />
-            <span>0852-8815-7752</span>
-          </a>
+
 
           <button
             type="button"

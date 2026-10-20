@@ -1,26 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { ActivePage, VehicleType } from './types';
-import { Navbar } from './components/Navbar';
-import { Sidebar } from './components/Sidebar';
-import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton';
-import { BerandaView } from './components/BerandaView';
-import { DanaTunaiView } from './components/DanaTunaiView';
-import { TakeOverView } from './components/TakeOverView';
-import { TopupView } from './components/TopupView';
-import { CabangView } from './components/CabangView';
-import { ArtikelView } from './components/ArtikelView';
-import { TentangKamiView } from './components/TentangKamiView';
-import { Footer } from './components/Footer';
-import { LegalModal } from './components/LegalModals';
+import { 
+  Navbar, 
+  Sidebar, 
+  Footer, 
+  WhatsAppFloatingButton, 
+  BerandaView, 
+  DanaTunaiView, 
+  TakeOverView, 
+  TopupView, 
+  CabangView, 
+  ArtikelView, 
+  TentangKamiView, 
+  LegalModal, 
+  CmsDashboardView, 
+  CmsLoginView,
+  SeoHead
+} from './components';
 import { CmsProvider, useCms } from './context/CmsContext';
-import { CmsDashboardView } from './components/cms/CmsDashboardView';
-import { CmsLoginView } from './components/cms/CmsLoginView';
 
 function MainAppContent() {
   const { isCmsView, isAuthenticated, openCms } = useCms();
   const [activePage, setActivePage] = useState<ActivePage>('beranda');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [legalModalType, setLegalModalType] = useState<'syarat' | 'privasi' | null>(null);
+
+  // Deep-linking / SEO hash sync on initial load & popstate
+  useEffect(() => {
+    const parseHashRoute = () => {
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+      if (!hash) return;
+      const validPages: ActivePage[] = ['beranda', 'dana-tunai', 'take-over', 'topup', 'cabang', 'artikel', 'tentang-kami'];
+      const matched = validPages.find(p => hash === p || hash.startsWith(p + '/'));
+      if (matched) {
+        setActivePage(matched);
+      }
+    };
+
+    parseHashRoute();
+    window.addEventListener('popstate', parseHashRoute);
+    return () => window.removeEventListener('popstate', parseHashRoute);
+  }, []);
 
   // Hidden discrete keyboard shortcut to access CMS portal: Ctrl + Shift + A (or Cmd + Shift + A)
   useEffect(() => {
@@ -64,6 +84,9 @@ function MainAppContent() {
   return (
     <div className="min-h-screen bg-[#FAF9F6] text-[#18181B] flex flex-col selection:bg-amber-100 selection:text-stone-900">
       
+      {/* Dynamic SEO & Schema.org sync */}
+      <SeoHead activePage={activePage} />
+
       {/* Top Navbar */}
       <Navbar
         activePage={activePage}

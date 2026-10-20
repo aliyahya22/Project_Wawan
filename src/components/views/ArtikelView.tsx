@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { ARTICLES_DATA } from '../data/mockData';
-import { Article } from '../types';
-import { openWhatsAppGeneral } from '../utils/whatsapp';
+import { ARTICLES_DATA } from '../../data/mockData';
+import { Article } from '../../types';
+import { openWhatsAppGeneral } from '../../utils/whatsapp';
 import { 
   Search, 
   ArrowRight, 
@@ -12,7 +12,7 @@ import {
   Calendar,
   Sparkles
 } from 'lucide-react';
-import { AdiraLogo } from './AdiraLogo';
+import { AdiraLogo } from '../common/AdiraLogo';
 
 export const ArtikelView: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('Semua');

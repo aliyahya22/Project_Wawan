@@ -1,5 +1,5 @@
 import React from 'react';
-import { openWhatsAppGeneral } from '../utils/whatsapp';
+import { openWhatsAppGeneral } from '../../utils/whatsapp';
 import { 
   ArrowRight, 
   MessageCircle, 
@@ -12,7 +12,7 @@ import {
   Sparkles,
   FileCheck2
 } from 'lucide-react';
-import { AdiraLogo } from './AdiraLogo';
+import { AdiraLogo } from '../common/AdiraLogo';
 
 interface TopupViewProps {
   onOpenApplication: (service?: 'Top Up') => void;

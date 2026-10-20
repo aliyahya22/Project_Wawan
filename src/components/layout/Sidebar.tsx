@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivePage } from '../types';
+import { ActivePage } from '../../types';
 import { 
   X, 
   Home, 
@@ -12,9 +12,9 @@ import {
   MessageCircle,
   PhoneCall
 } from 'lucide-react';
-import { openWhatsAppGeneral } from '../utils/whatsapp';
-import { DISPLAY_PHONE } from '../data/mockData';
-import { AdiraLogo } from './AdiraLogo';
+import { openWhatsAppGeneral } from '../../utils/whatsapp';
+import { DISPLAY_PHONE } from '../../data/mockData';
+import { AdiraLogo } from '../common/AdiraLogo';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -183,7 +183,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             className="w-full flex items-center justify-center gap-1.5 py-2 px-3 border border-emerald-200 bg-emerald-50 hover:bg-emerald-100/80 text-emerald-800 font-semibold text-xs rounded-xl transition-colors cursor-pointer"
           >
             <MessageCircle className="w-3.5 h-3.5 text-emerald-700" />
-            <span>Chat WhatsApp 0852-8815-7752</span>
+            <span>Hubungi Kami (WhatsApp)</span>
           </button>
         </div>
 

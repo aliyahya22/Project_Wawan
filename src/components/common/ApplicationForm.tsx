@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { ApplicationFormData } from '../types';
+import { ApplicationFormData } from '../../types';
 import { 
   User, 
   MessageCircle, 
@@ -9,9 +9,9 @@ import {
   CheckCircle2, 
   AlertCircle 
 } from 'lucide-react';
-import { openWhatsAppApplication } from '../utils/whatsapp';
+import { openWhatsAppApplication } from '../../utils/whatsapp';
 
-import { useCms } from '../context/CmsContext';
+import { useCms } from '../../context/CmsContext';
 
 interface ApplicationFormProps {
   initialCollateral?: string;

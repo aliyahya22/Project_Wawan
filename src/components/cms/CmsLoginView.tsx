@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useCms } from '../../context/CmsContext';
-import { AdiraLogo } from '../AdiraLogo';
+import { AdiraLogo } from '../common/AdiraLogo';
 import { Lock, ArrowRight, ShieldCheck, ArrowLeft, KeyRound, AlertCircle } from 'lucide-react';
 
 export const CmsLoginView: React.FC = () => {

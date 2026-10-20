@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import L from 'leaflet';
-import { ALL_515_BRANCHES, FullBranch } from '../data/branchesData';
-import { openWhatsAppBranch } from '../utils/whatsapp';
+import { ALL_515_BRANCHES, FullBranch } from '../../data/branchesData';
+import { openWhatsAppBranch } from '../../utils/whatsapp';
 import { 
   MapPin, 
   Search, 
@@ -24,8 +24,8 @@ import {
   Copy,
   Check
 } from 'lucide-react';
-import { AdiraLogo } from './AdiraLogo';
-import { updateBranchSeo } from '../utils/seo';
+import { AdiraLogo } from '../common/AdiraLogo';
+import { updateBranchSeo } from '../../utils/seo';
 import { CabangDetailView } from './CabangDetailView';
 
 export const CabangView: React.FC = () => {
@@ -476,8 +476,8 @@ export const CabangView: React.FC = () => {
               <span>Terdaftar & Diawasi OJK</span>
             </div>
             <div className="flex items-center gap-1.5 font-medium text-emerald-700 font-bold">
-              <Phone className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>Hotline & WA: 0852-8815-7752</span>
+              <MessageCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>WhatsApp: 0852-8815-7752</span>
             </div>
           </div>
         </div>
@@ -605,38 +605,41 @@ export const CabangView: React.FC = () => {
 
       </div>
 
-      {/* BENTO ROW 3: MAP VIEW (7 COLS) & BRANCH SPOTLIGHT + DIRECTORY (5 COLS) */}
+      {/* BENTO ROW 3: MAP VIEW (5 COLS) & BRANCH DIRECTORY (7 COLS) - PERFECTLY BALANCED HEIGHT */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
         
-        {/* Bento Item 3: Main Map Container with OpenStreetMap & Google Maps detail switcher (7 Cols) */}
-        <div className="lg:col-span-7 bg-white rounded-3xl border border-stone-200/90 shadow-2xs overflow-hidden flex flex-col">
+        {/* Bento Item 3: Modern Map Widget (5 Cols on Desktop - Harmonious Bento Height) */}
+        <div className="lg:col-span-5 bg-white rounded-3xl border border-stone-200/90 shadow-xs overflow-hidden flex flex-col h-[520px] sm:h-[540px] lg:h-[560px]">
           
-          {/* Top Bar for Map: Provider Switcher (OSM vs Google Maps) */}
-          <div className="px-3.5 py-2.5 sm:px-5 sm:py-3 border-b border-stone-100 bg-[#FAF9F6] flex flex-row items-center justify-between gap-2 text-xs">
+          {/* Modern Map Header */}
+          <div className="px-3.5 py-2.5 sm:px-4 sm:py-3 border-b border-stone-100 bg-[#FAF9F6]/90 backdrop-blur-xs flex flex-row items-center justify-between gap-2 text-xs shrink-0">
             <div className="flex items-center gap-2 min-w-0">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
               <span className="font-bold text-stone-800 truncate text-[11px] sm:text-xs">
-                {mapProvider === 'osm' ? 'Peta Cabang Nasional' : `Google Maps: ${selectedBranch.shortName}`}
+                {mapProvider === 'osm' ? 'Peta Nasional' : selectedBranch.shortName}
               </span>
             </div>
 
-            {/* View Switcher: OSM vs Google Maps Direct */}
-            <div className="flex items-center gap-1 bg-stone-200/80 p-1 rounded-xl shrink-0">
+            {/* Modern Segmented Switcher */}
+            <div className="flex items-center gap-1 bg-stone-200/70 p-0.5 rounded-xl shrink-0">
               <button
                 type="button"
                 onClick={() => setMapProvider('osm')}
-                className={`px-2 py-1 text-[11px] font-semibold rounded-lg transition-colors cursor-pointer ${
+                className={`px-2.5 py-1 text-[10px] sm:text-[11px] font-semibold rounded-lg transition-all cursor-pointer ${
                   mapProvider === 'osm'
                     ? 'bg-white text-stone-950 shadow-xs'
                     : 'text-stone-600 hover:text-stone-900'
                 }`}
               >
-                Peta Nasional
+                Peta OSM
               </button>
               <button
                 type="button"
                 onClick={() => setMapProvider('google')}
-                className={`px-2 py-1 text-[11px] font-semibold rounded-lg transition-colors cursor-pointer ${
+                className={`px-2.5 py-1 text-[10px] sm:text-[11px] font-semibold rounded-lg transition-all cursor-pointer ${
                   mapProvider === 'google'
                     ? 'bg-[#18181B] text-white shadow-xs'
                     : 'text-stone-600 hover:text-stone-900'
@@ -647,14 +650,13 @@ export const CabangView: React.FC = () => {
             </div>
           </div>
 
-          {/* Real Map Container */}
-          <div className="relative w-full h-[460px] sm:h-[540px] lg:h-[620px] bg-stone-100 flex-1 overflow-hidden">
+          {/* Map Viewport - Harmonious height matching the directory card */}
+          <div className="relative w-full flex-1 bg-stone-100 overflow-hidden min-h-[340px]">
             
             {/* 1. Leaflet OSM Map */}
             <div 
               ref={mapContainerRef} 
               style={{ 
-                minHeight: '460px', 
                 height: '100%', 
                 width: '100%',
                 display: mapProvider === 'osm' ? 'block' : 'none' 
@@ -678,18 +680,18 @@ export const CabangView: React.FC = () => {
             )}
 
             {/* Floating Live Badge */}
-            <div className="absolute top-3 right-3 sm:top-3.5 sm:right-3.5 z-20 bg-white/95 backdrop-blur-xs px-2.5 sm:px-3 py-1.5 rounded-xl border border-stone-200/90 shadow-xs text-[10px] sm:text-[11px] text-stone-800 font-medium flex items-center gap-1.5 sm:gap-2">
-              <MapPin className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-              <span>{filteredBranches.length} Titik Cabang</span>
+            <div className="absolute top-2.5 right-2.5 z-20 bg-white/95 backdrop-blur-xs px-2.5 py-1 rounded-lg border border-stone-200/90 shadow-2xs text-[10px] text-stone-800 font-semibold flex items-center gap-1.5">
+              <MapPin className="w-3 h-3 text-amber-600 shrink-0" />
+              <span>{filteredBranches.length} Cabang</span>
             </div>
           </div>
 
           {/* Bottom Bar Info */}
-          <div className="p-3 sm:p-3.5 bg-white border-t border-stone-100 text-[11px] text-stone-500 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
+          <div className="p-3 sm:p-3.5 bg-white border-t border-stone-100 text-[11px] text-stone-500 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 shrink-0">
             <span>
               {mapProvider === 'osm' 
-                ? 'Klik pin oranye di peta untuk melihat ringkasan cabang dan rute navigasi.'
-                : 'Peta detail Google Maps aktif untuk cabang ini.'}
+                ? 'Klik pin oranye di peta untuk rute.'
+                : 'Peta detail Google Maps aktif.'}
             </span>
             <div className="flex items-center gap-3 shrink-0">
               <a
@@ -700,7 +702,7 @@ export const CabangView: React.FC = () => {
                 rel="noopener noreferrer"
                 className="text-stone-900 font-semibold hover:underline inline-flex items-center gap-1"
               >
-                <span>Buka Google Maps</span>
+                <span>Google Maps</span>
                 <ExternalLink className="w-3 h-3" />
               </a>
               <button
@@ -708,14 +710,14 @@ export const CabangView: React.FC = () => {
                 onClick={handleResetMapView}
                 className="text-stone-900 font-semibold hover:underline cursor-pointer"
               >
-                Reset Posisi
+                Reset
               </button>
             </div>
           </div>
         </div>
 
-        {/* Bento Item 4: Right Column - Daftar 515 Kantor Cabang */}
-        <div className="lg:col-span-5 bg-white rounded-3xl border border-stone-200/90 shadow-2xs overflow-hidden flex flex-col h-[520px] sm:h-[600px] lg:h-auto">
+        {/* Bento Item 4: Right Column - Daftar 515 Kantor Cabang (7 Cols on Desktop - Perfectly aligned height) */}
+        <div className="lg:col-span-7 bg-white rounded-3xl border border-stone-200/90 shadow-xs overflow-hidden flex flex-col h-[520px] sm:h-[540px] lg:h-[560px]">
           
           {/* Header */}
           <div className="p-4 sm:p-5 border-b border-stone-100 bg-[#FAF9F6] space-y-2.5 shrink-0">

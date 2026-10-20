@@ -1,9 +1,9 @@
 import React from 'react';
-import { ActivePage } from '../types';
-import { useCms } from '../context/CmsContext';
+import { ActivePage } from '../../types';
+import { useCms } from '../../context/CmsContext';
 import { MapPin, Phone, Clock, MessageCircle, Lock } from 'lucide-react';
-import { openWhatsAppGeneral } from '../utils/whatsapp';
-import { AdiraLogo } from './AdiraLogo';
+import { openWhatsAppGeneral } from '../../utils/whatsapp';
+import { AdiraLogo } from '../common/AdiraLogo';
 
 interface FooterProps {
   onNavigate: (page: ActivePage) => void;
@@ -54,13 +54,14 @@ export const Footer: React.FC<FooterProps> = ({
                 <span>{settings.workingHours}</span>
               </div>
               <div className="flex items-center gap-2 text-stone-600">
-                <Phone className="w-3.5 h-3.5 text-stone-500 shrink-0" />
-                <a 
-                  href="tel:085288157752" 
-                  className="font-bold text-stone-800 hover:text-stone-950 transition-colors"
+                <MessageCircle className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                <button
+                  type="button"
+                  onClick={() => openWhatsAppGeneral('Footer Kontak')}
+                  className="font-bold text-emerald-800 hover:underline transition-colors text-left cursor-pointer"
                 >
-                  Hotline & WA: {settings.displayPhone || '0852-8815-7752'}
-                </a>
+                  WhatsApp: {settings.displayPhone || '0852-8815-7752'}
+                </button>
               </div>
             </div>
           </div>

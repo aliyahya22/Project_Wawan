@@ -1,5 +1,5 @@
 import React from 'react';
-import { openWhatsAppGeneral } from '../utils/whatsapp';
+import { openWhatsAppGeneral } from '../../utils/whatsapp';
 import { 
   MessageCircle,
   ShieldCheck, 
@@ -13,7 +13,7 @@ import {
   Truck,
   ArrowRight
 } from 'lucide-react';
-import { AdiraLogo } from './AdiraLogo';
+import { AdiraLogo } from '../common/AdiraLogo';
 
 export const TentangKamiView: React.FC = () => {
   return (

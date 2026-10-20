@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
-import { VehicleType } from '../types';
-import { VEHICLE_CRITERIA, PROFILE_REQUIREMENTS } from '../data/mockData';
-import { openWhatsAppGeneral } from '../utils/whatsapp';
+import { VehicleType } from '../../types';
+import { VEHICLE_CRITERIA, PROFILE_REQUIREMENTS } from '../../data/mockData';
+import { openWhatsAppGeneral } from '../../utils/whatsapp';
 import { 
   Car, 
   Bike, 
   Truck, 
   MessageCircle, 
-  ArrowRight,
-  ShieldCheck,
-  CheckCircle2,
-  Clock,
-  Sparkles,
-  Layers,
-  Lock,
-  FileCheck2,
-  Banknote
+  ArrowRight, 
+  ShieldCheck, 
+  CheckCircle2, 
+  Clock, 
+  Sparkles, 
+  Layers, 
+  Lock, 
+  FileCheck2, 
+  Banknote 
 } from 'lucide-react';
-import { AdiraLogo } from './AdiraLogo';
+import { AdiraLogo } from '../common/AdiraLogo';
 
 interface DanaTunaiViewProps {
   onOpenApplication: (vehicleType?: VehicleType) => void;

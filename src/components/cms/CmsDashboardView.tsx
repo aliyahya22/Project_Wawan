@@ -6,7 +6,7 @@ import {
   Article, 
   VehicleType 
 } from '../../types';
-import { AdiraLogo } from '../AdiraLogo';
+import { AdiraLogo } from '../common/AdiraLogo';
 import { 
   Inbox, 
   Settings, 

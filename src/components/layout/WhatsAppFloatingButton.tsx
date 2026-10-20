@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MessageCircle, X, ArrowUpRight } from 'lucide-react';
-import { openWhatsAppGeneral } from '../utils/whatsapp';
+import { openWhatsAppGeneral } from '../../utils/whatsapp';
 
 export const WhatsAppFloatingButton: React.FC = () => {
   const [showTooltip, setShowTooltip] = useState(false);
@@ -47,7 +47,7 @@ export const WhatsAppFloatingButton: React.FC = () => {
           <MessageCircle className="w-3.5 h-3.5" />
         </div>
         <span className="hidden sm:inline font-semibold text-xs whitespace-nowrap">
-          Chat WhatsApp
+          Hubungi Kami
         </span>
       </button>
     </div>

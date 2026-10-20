@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FullBranch, ALL_515_BRANCHES } from '../data/branchesData';
+import { FullBranch, ALL_515_BRANCHES } from '../../data/branchesData';
 import { 
   ArrowLeft, 
   MapPin, 
@@ -23,9 +23,9 @@ import {
   PhoneCall,
   Info
 } from 'lucide-react';
-import { AdiraLogo } from './AdiraLogo';
-import { openWhatsAppBranch } from '../utils/whatsapp';
-import { updateBranchSeo } from '../utils/seo';
+import { AdiraLogo } from '../common/AdiraLogo';
+import { openWhatsAppBranch } from '../../utils/whatsapp';
+import { updateBranchSeo } from '../../utils/seo';
 
 interface CabangDetailViewProps {
   branch: FullBranch;
@@ -143,13 +143,14 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
               <span>Chat WhatsApp Cabang</span>
             </button>
 
-            <a
-              href="tel:085288157752"
-              className="w-full py-3 px-5 bg-emerald-50 hover:bg-emerald-100 text-emerald-950 border border-emerald-300 font-bold text-sm rounded-xl flex items-center justify-center gap-2 shadow-xs transition-all text-center"
+            <button
+              type="button"
+              onClick={() => openWhatsAppBranch(branch.name, branch.city, '6285288157752')}
+              className="w-full py-3 px-5 bg-emerald-50 hover:bg-emerald-100 text-emerald-950 border border-emerald-300 font-bold text-sm rounded-xl flex items-center justify-center gap-2 shadow-xs transition-all text-center cursor-pointer"
             >
-              <PhoneCall className="w-4 h-4 text-emerald-700" />
-              <span>Hotline 0852-8815-7752</span>
-            </a>
+              <MessageCircle className="w-4 h-4 text-emerald-700" />
+              <span>WhatsApp: 0852-8815-7752</span>
+            </button>
 
             <div className="flex items-center gap-2">
               <a
@@ -484,10 +485,14 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
               </div>
 
               <div className="flex items-center justify-between p-3 rounded-xl bg-stone-50 border border-stone-200/70">
-                <span className="text-stone-500 font-medium">Nomor Hotline Resmi:</span>
-                <a href="tel:085288157752" className="font-extrabold text-stone-950 hover:underline">
+                <span className="text-stone-500 font-medium">Nomor WhatsApp Resmi:</span>
+                <button
+                  type="button"
+                  onClick={() => openWhatsAppBranch(branch.name, branch.city, '6285288157752')}
+                  className="font-extrabold text-emerald-800 hover:underline cursor-pointer"
+                >
                   0852-8815-7752
-                </a>
+                </button>
               </div>
             </div>
 
