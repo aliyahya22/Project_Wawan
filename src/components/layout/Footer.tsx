@@ -1,7 +1,8 @@
 import React from 'react';
 import { ActivePage } from '../../types';
 import { useCms } from '../../context/CmsContext';
-import { MapPin, Phone, Clock, MessageCircle, Lock } from 'lucide-react';
+import { Clock, ShieldCheck, UserCheck } from 'lucide-react';
+import { WhatsAppIcon } from '../common/WhatsAppIcon';
 import { openWhatsAppGeneral } from '../../utils/whatsapp';
 import { AdiraLogo } from '../common/AdiraLogo';
 
@@ -14,7 +15,7 @@ export const Footer: React.FC<FooterProps> = ({
   onNavigate,
   onOpenLegal,
 }) => {
-  const { settings, openCms } = useCms();
+  const { openCms } = useCms();
 
   return (
     <footer className="bg-white border-t border-stone-200/80 text-stone-600 transition-colors">
@@ -22,7 +23,7 @@ export const Footer: React.FC<FooterProps> = ({
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
           
-          {/* Kolom 1: Profil Brand & Logo Adira */}
+          {/* Kolom 1: Profil Brand, Logo Adira & Informasi Agen Resmi AXI */}
           <div className="lg:col-span-5 space-y-4">
             <div className="flex items-center gap-3">
               <AdiraLogo size="sm" variant="badge" />
@@ -30,39 +31,43 @@ export const Footer: React.FC<FooterProps> = ({
                 <span className="text-sm font-bold text-stone-900 tracking-tight block">
                   Dana Cepat BPKB
                 </span>
-                <span className="text-xs text-stone-500 font-medium block">
-                  Kemitraan Resmi AXI Adira Finance
-                </span>
               </div>
             </div>
 
             <p className="text-xs text-stone-600 leading-relaxed max-w-sm">
-              Layanan pencairan dana tunai cepat jaminan BPKB kendaraan bermotor (Motor min. 2017, Mobil min. 2010, Truk min. 2019, Pickup min. 2019). Resmi, aman, transparan, dan terpercaya.
+              Layanan pencairan dana tunai cepat jaminan BPKB kendaraan bermotor (Motor min. 2017, Mobil min. 2010, Truk min. 2019, Pickup min. 2019). Resmi, aman, transparan, dan terpercaya di seluruh Indonesia.
             </p>
 
-            {/* Alamat Kantor dari CMS Settings */}
-            <div className="space-y-2 text-xs pt-2">
-              <div className="text-[11px] font-bold text-stone-900 uppercase tracking-wider">
-                Alamat Kantor
+            {/* Informasi Agen Resmi AXI (Sesuai Revisi Klien) */}
+            <div className="p-3.5 bg-stone-50 rounded-2xl border border-stone-200/80 space-y-2 text-xs max-w-sm">
+              <div className="flex items-center gap-2 text-stone-900 font-bold text-xs border-b border-stone-200/60 pb-1.5">
+                <UserCheck className="w-4 h-4 text-amber-600 shrink-0" />
+                <span>Informasi Agen Resmi AXI</span>
               </div>
-              <div className="flex items-start gap-2 text-stone-600">
-                <MapPin className="w-3.5 h-3.5 text-stone-400 shrink-0 mt-0.5" />
-                <span>{settings.headquartersAddress}</span>
+              <div className="space-y-0.5">
+                <div className="text-[13px] font-extrabold text-stone-900">
+                  NURHASANAH
+                </div>
+                <div className="text-stone-600 font-mono text-[11px] font-semibold">
+                  ID AXI: 014324000286
+                </div>
               </div>
-              <div className="flex items-start gap-2 text-stone-600">
-                <Clock className="w-3.5 h-3.5 text-stone-400 shrink-0 mt-0.5" />
-                <span>{settings.workingHours}</span>
-              </div>
-              <div className="flex items-center gap-2 text-stone-600">
-                <MessageCircle className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+              <div className="flex items-center gap-2 pt-1 border-t border-stone-200/50">
+                <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                 <button
                   type="button"
-                  onClick={() => openWhatsAppGeneral('Footer Kontak')}
-                  className="font-bold text-emerald-800 hover:underline transition-colors text-left cursor-pointer"
+                  onClick={() => openWhatsAppGeneral()}
+                  className="font-bold text-emerald-800 hover:underline cursor-pointer"
                 >
-                  WhatsApp: {settings.displayPhone || '0852-8815-7752'}
+                  WhatsApp Resmi: 0852-8815-7752
                 </button>
               </div>
+            </div>
+
+            {/* Jam Operasional */}
+            <div className="flex items-center gap-2 text-xs text-stone-500 pt-1">
+              <Clock className="w-3.5 h-3.5 text-stone-400 shrink-0" />
+              <span>Senin - Sabtu: 08.30 - 17.00 WIB (Layanan WA 24 Jam)</span>
             </div>
           </div>
 
@@ -139,9 +144,9 @@ export const Footer: React.FC<FooterProps> = ({
                 <button
                   type="button"
                   onClick={() => onNavigate('tentang-kami')}
-                  className="hover:text-stone-950 transition-colors text-left cursor-pointer"
+                  className="hover:text-stone-950 transition-colors text-left cursor-pointer flex items-center gap-1.5"
                 >
-                  Tentang Kami (Profil AXI)
+                  <span>Tentang Kami</span>
                 </button>
               </li>
               <li>
@@ -163,28 +168,18 @@ export const Footer: React.FC<FooterProps> = ({
                 </button>
               </li>
             </ul>
-
-            <div className="pt-4">
-              <button
-                type="button"
-                onClick={() => openWhatsAppGeneral('Hubungi Customer Service', settings.whatsappNumber)}
-                className="w-full inline-flex items-center justify-center gap-2 py-2 px-3 bg-emerald-50 hover:bg-emerald-100/80 text-emerald-800 border border-emerald-300 font-semibold text-xs rounded-xl transition-colors cursor-pointer"
-              >
-                <MessageCircle className="w-3.5 h-3.5 text-emerald-700" />
-                <span>Layanan WA Resmi</span>
-              </button>
-            </div>
           </div>
 
         </div>
 
         {/* Regulatory & Copyright Row with Hidden Discreet Access */}
         <div className="mt-12 pt-6 border-t border-stone-100 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-stone-500">
-          <p>
-            © {new Date().getFullYear()} Dana Cepat BPKB · Kemitraan Resmi AXI Adira Finance. Seluruh hak cipta dilindungi.
+          <p className="flex items-center gap-1.5 flex-wrap">
+            <span>© {new Date().getFullYear()} Dana Cepat BPKB. Agen Resmi AXI NURHASANAH (ID: 014324000286).</span>
           </p>
 
           <div className="flex items-center gap-2 text-[11px] text-stone-400">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
             <span>Berizin & Diawasi OJK Melalui Lembaga Pembiayaan Terkait</span>
             
             {/* Discreet Hidden Link to CMS */}

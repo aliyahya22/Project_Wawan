@@ -25,6 +25,8 @@ import {
   Check
 } from 'lucide-react';
 import { AdiraLogo } from '../common/AdiraLogo';
+import { WhatsAppIcon } from '../common/WhatsAppIcon';
+import { formatBranchDisplayName } from '../../utils/branchHelper';
 import { updateBranchSeo } from '../../utils/seo';
 import { CabangDetailView } from './CabangDetailView';
 
@@ -251,12 +253,8 @@ export const CabangView: React.FC = () => {
             <span style="font-size: 10px; color: #71717A; font-weight: 600;">${branch.city}</span>
           </div>
 
-          <div style="font-size: 13px; font-weight: 800; color: #18181B; margin: 3px 0 2px 0; line-height: 1.3;">
-            ${branch.name}
-          </div>
-
-          <div style="font-size: 11px; color: #52525B; line-height: 1.35; margin-bottom: 4px;">
-            📍 ${branch.address}
+          <div style="font-size: 13px; font-weight: 800; color: #18181B; margin: 3px 0 4px 0; line-height: 1.3;">
+            ${formatBranchDisplayName(branch)}
           </div>
 
           <div style="font-size: 10px; color: #71717A; margin-bottom: 7px;">
@@ -289,7 +287,7 @@ export const CabangView: React.FC = () => {
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
             <a href="https://wa.me/6285288157752?text=${encodeURIComponent(
-              `Halo Admin ${branch.name} (${branch.city}), saya ingin menanyakan info dana BPKB di cabang ini. Terima kasih.`
+              `*Pengajuan Gadai BPKB*\nNama :\nAlamat Lengkap :\nMerk/Tipe Kendaraan :\nTahun Kendaraan :`
             )}" target="_blank" rel="noopener noreferrer" style="
               background: #F4F4F5;
               color: #18181B;
@@ -302,7 +300,7 @@ export const CabangView: React.FC = () => {
               display: block;
               border: 1px solid #E4E4E7;
             ">
-              💬 Chat WA
+              Hubungi Kami
             </a>
             <a href="https://www.google.com/maps/dir/?api=1&destination=${branch.coordinates.lat},${branch.coordinates.lng}" target="_blank" rel="noopener noreferrer" style="
               background: #18181B;
@@ -369,19 +367,26 @@ export const CabangView: React.FC = () => {
     prevSelectedBranchIdRef.current = selectedBranch.id;
   }, [selectedBranch]);
 
-  // Handle select branch & fly map
+  // Handle select branch & fly map safely
   const handleSelectBranch = (branch: FullBranch) => {
+    if (!branch || !branch.coordinates || typeof branch.coordinates.lat !== 'number' || typeof branch.coordinates.lng !== 'number' || isNaN(branch.coordinates.lat) || isNaN(branch.coordinates.lng)) {
+      return;
+    }
     setSelectedBranch(branch);
     const map = mapInstanceRef.current;
     if (map) {
-      map.flyTo([branch.coordinates.lat, branch.coordinates.lng], 14, {
-        duration: 1,
-      });
-      const marker = markersMapRef.current.get(branch.id);
-      if (marker) {
-        setTimeout(() => {
-          marker.openPopup();
-        }, 500);
+      try {
+        map.flyTo([branch.coordinates.lat, branch.coordinates.lng], 14, {
+          duration: 1,
+        });
+        const marker = markersMapRef.current.get(branch.id);
+        if (marker) {
+          setTimeout(() => {
+            marker.openPopup();
+          }, 500);
+        }
+      } catch (err) {
+        console.error('Map flyTo error:', err);
       }
     }
   };
@@ -738,10 +743,10 @@ export const CabangView: React.FC = () => {
               <div className="p-2.5 sm:p-3 bg-amber-50/90 border border-amber-200/90 rounded-2xl flex items-center justify-between gap-2 text-xs">
                 <div className="min-w-0">
                   <div className="text-[10px] font-bold text-amber-800 uppercase tracking-wider">
-                    Cabang Terpilih di Peta:
+                    Cabang Terpilih:
                   </div>
                   <div className="font-extrabold text-stone-950 truncate text-xs sm:text-[13px]">
-                    {selectedBranch.name}
+                    {formatBranchDisplayName(selectedBranch)}
                   </div>
                   <div className="text-[10px] text-stone-500 truncate">
                     {selectedBranch.city}, {selectedBranch.province}
@@ -797,16 +802,12 @@ export const CabangView: React.FC = () => {
                     <div className="flex-1 min-w-0 space-y-1">
                       <div className="flex items-center justify-between gap-1.5">
                         <h4 className={`text-xs sm:text-[13px] font-bold truncate ${isSelected ? 'text-stone-950' : 'text-stone-900'}`}>
-                          {branch.name}
+                          {formatBranchDisplayName(branch)}
                         </h4>
                         <span className="text-[10px] text-stone-500 shrink-0 font-semibold bg-stone-100 px-2 py-0.5 rounded-md">
                           {branch.city}
                         </span>
                       </div>
-
-                      <p className="text-[11px] text-stone-500 line-clamp-1">
-                        {branch.address}
-                      </p>
 
                       <div className="flex items-center justify-between pt-1 text-[11px]">
                         <span className="text-[10px] text-stone-400">
@@ -878,7 +879,7 @@ export const CabangView: React.FC = () => {
             <Sparkles className="w-4 h-4 text-emerald-700" />
           </div>
           <h3 className="text-sm font-bold text-stone-900 tracking-tight">
-            Pencairan Langsung 1 Hari
+            Proses Pencairan
           </h3>
           <p className="text-xs text-stone-600 leading-relaxed">
             Setelah data dan fisik nomor rangka/mesin divalidasi, dana ditransfer utuh langsung ke rekening tabungan bank atas nama pemohon.

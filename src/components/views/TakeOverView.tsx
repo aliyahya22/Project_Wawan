@@ -2,7 +2,6 @@ import React from 'react';
 import { openWhatsAppGeneral } from '../../utils/whatsapp';
 import { 
   ArrowRight, 
-  MessageCircle, 
   TrendingDown, 
   Banknote,
   CheckCircle2,
@@ -13,6 +12,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { AdiraLogo } from '../common/AdiraLogo';
+import { WhatsAppLogo } from '../common/WhatsAppLogo';
 
 interface TakeOverViewProps {
   onOpenApplication: (service?: 'Take Over') => void;
@@ -40,7 +40,7 @@ export const TakeOverView: React.FC<TakeOverViewProps> = ({ onOpenApplication })
             </h1>
 
             <p className="text-xs sm:text-sm text-stone-600 leading-relaxed max-w-xl">
-              Pengalihan fasilitas pembiayaan kendaraan yang masih berjalan di leasing, bank, atau koperasi lain ke mitra resmi AXI Adira. Dapatkan angsuran lebih terjangkau, jangka waktu diperpanjang, serta sisa dana pencairan tambahan langsung ke rekening Anda.
+              Pengalihan fasilitas pembiayaan kendaraan yang masih berjalan di leasing, bank, atau koperasi lain ke mitra resmi Adira Finance. Dapatkan angsuran lebih terjangkau, jangka waktu diperpanjang, serta sisa dana pencairan tambahan langsung ke rekening Anda.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs">
@@ -77,8 +77,8 @@ export const TakeOverView: React.FC<TakeOverViewProps> = ({ onOpenApplication })
               onClick={() => openWhatsAppGeneral('Take Over BPKB Kendaraan')}
               className="px-5 py-3.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-950 font-bold text-xs rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer"
             >
-              <MessageCircle className="w-4 h-4 text-emerald-700" />
-              <span>WhatsApp: 0852-8815-7752</span>
+              <WhatsAppLogo className="w-4 h-4 shrink-0" />
+              <span>Hubungi Kami: 0852-8815-7752</span>
             </button>
           </div>
         </div>
@@ -88,7 +88,7 @@ export const TakeOverView: React.FC<TakeOverViewProps> = ({ onOpenApplication })
           <div className="space-y-3">
             <div className="flex items-center gap-2 text-stone-900 font-bold text-sm">
               <Sparkles className="w-4 h-4 text-amber-500" />
-              <span>Keistimewaan Take Over AXI Adira</span>
+              <span>Keistimewaan Take Over Adira Finance</span>
             </div>
             <p className="text-xs text-stone-500 leading-relaxed">
               Pelunasan tempat lama kami dampingi langsung secara legal dan aman.
@@ -164,7 +164,7 @@ export const TakeOverView: React.FC<TakeOverViewProps> = ({ onOpenApplication })
             </div>
             <h3 className="text-xs font-bold text-stone-900">Analisa & Persetujuan Kredit</h3>
             <p className="text-xs text-stone-600 leading-relaxed">
-              AXI Adira memverifikasi data kendaraan dan kapasitas penghasilan untuk menyetujui plafon baru dan nilai sisa uang yang bisa dicairkan.
+              Adira Finance memverifikasi data kendaraan dan kapasitas penghasilan untuk menyetujui plafon baru dan nilai sisa uang yang bisa dicairkan.
             </p>
           </div>
 

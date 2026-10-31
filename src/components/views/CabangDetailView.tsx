@@ -3,29 +3,24 @@ import { FullBranch, ALL_515_BRANCHES } from '../../data/branchesData';
 import { 
   ArrowLeft, 
   MapPin, 
-  Phone, 
   Clock, 
-  MessageCircle, 
   Navigation, 
   ExternalLink, 
   Copy, 
   Check, 
   ShieldCheck, 
-  Truck, 
   Sparkles, 
   Building2, 
-  CheckCircle2, 
   Car, 
-  Calendar, 
   FileText, 
   Share2, 
   ChevronRight,
-  PhoneCall,
   Info
 } from 'lucide-react';
-import { AdiraLogo } from '../common/AdiraLogo';
+import { WhatsAppIcon } from '../common/WhatsAppIcon';
 import { openWhatsAppBranch } from '../../utils/whatsapp';
 import { updateBranchSeo } from '../../utils/seo';
+import { formatBranchDisplayName } from '../../utils/branchHelper';
 
 interface CabangDetailViewProps {
   branch: FullBranch;
@@ -41,94 +36,92 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
   const [copiedAddress, setCopiedAddress] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
 
+  // SEO dynamic meta update for this branch
   useEffect(() => {
     updateBranchSeo(branch);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [branch]);
 
   const handleCopyAddress = () => {
-    if (navigator?.clipboard) {
-      navigator.clipboard.writeText(`${branch.name}, ${branch.address}, ${branch.city}, ${branch.province}`);
-      setCopiedAddress(true);
-      setTimeout(() => setCopiedAddress(false), 2000);
-    }
+    const text = `${formatBranchDisplayName(branch, true)}, ${branch.city}, ${branch.province}`;
+    navigator.clipboard.writeText(text);
+    setCopiedAddress(true);
+    setTimeout(() => setCopiedAddress(false), 2000);
   };
 
   const handleShare = () => {
-    if (navigator?.clipboard) {
-      const url = window.location.href;
-      navigator.clipboard.writeText(url);
-      setCopiedLink(true);
-      setTimeout(() => setCopiedLink(false), 2000);
-    }
+    const url = window.location.href;
+    navigator.clipboard.writeText(url);
+    setCopiedLink(true);
+    setTimeout(() => setCopiedLink(false), 2000);
   };
 
-  // Nearby branches in the same province or region (excluding current)
+  // 3 nearby branches in same province
   const nearbyBranches = ALL_515_BRANCHES
-    .filter(b => b.id !== branch.id && (b.province === branch.province || b.region === branch.region))
+    .filter(b => b.province === branch.province && b.id !== branch.id)
     .slice(0, 3);
 
+  const displayName = formatBranchDisplayName(branch, true);
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-8 animate-in fade-in duration-300">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 animate-in fade-in duration-200">
       
-      {/* Top Navigation & Breadcrumbs */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-stone-200">
+      {/* Top Breadcrumb & Back Navigation */}
+      <div className="flex items-center justify-between gap-3 text-xs text-stone-500">
         <button
           type="button"
           onClick={onBack}
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-stone-100 text-stone-900 border border-stone-200 text-xs font-bold transition-colors cursor-pointer shadow-2xs group w-fit"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-stone-100 border border-stone-200/80 text-stone-700 font-semibold transition-colors cursor-pointer shadow-2xs"
         >
-          <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-          <span>Kembali ke Peta & Daftar Cabang</span>
+          <ArrowLeft className="w-3.5 h-3.5" />
+          <span>Kembali ke Direktori Cabang</span>
         </button>
 
-        <div className="flex items-center gap-1.5 text-xs text-stone-500 overflow-x-auto whitespace-nowrap">
-          <span>Beranda</span>
-          <ChevronRight className="w-3.5 h-3.5 text-stone-400 shrink-0" />
+        <nav aria-label="Breadcrumb" className="hidden sm:flex items-center gap-1.5 text-stone-400">
           <button 
             type="button" 
             onClick={onBack}
-            className="hover:text-stone-900 font-medium cursor-pointer"
+            className="hover:text-stone-900 font-medium cursor-pointer transition-colors"
           >
             Kantor Cabang
           </button>
           <ChevronRight className="w-3.5 h-3.5 text-stone-400 shrink-0" />
-          <span className="font-semibold text-stone-900 truncate max-w-[200px] sm:max-w-xs">
+          <span className="font-semibold text-stone-700 truncate max-w-[160px] sm:max-w-xs">
             {branch.city}
           </span>
           <ChevronRight className="w-3.5 h-3.5 text-stone-400 shrink-0" />
-          <span className="text-amber-700 font-bold truncate max-w-[150px]">
-            {branch.shortName}
+          <span className="text-amber-800 font-bold truncate max-w-[200px]">
+            {displayName}
           </span>
-        </div>
+        </nav>
       </div>
 
       {/* Main Header Hero Card */}
       <div className="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200/90 shadow-2xs relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-amber-100/50 via-amber-50/20 to-transparent rounded-bl-full pointer-events-none -mr-20 -mt-20" />
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-amber-100/40 via-amber-50/15 to-transparent rounded-bl-full pointer-events-none -mr-20 -mt-20" />
         
         <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           <div className="space-y-3 max-w-3xl">
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-xs font-bold text-stone-900 bg-[#FFCC00] px-3 py-1 rounded-lg">
-                {branch.region}
+              <span className="text-[11px] font-bold text-stone-900 bg-[#FFCC00] px-3 py-1 rounded-lg">
+                Wilayah {branch.region}
               </span>
-              <span className="text-xs text-stone-700 bg-stone-100 px-3 py-1 rounded-lg font-semibold border border-stone-200">
+              <span className="text-[11px] text-stone-700 bg-stone-100 px-3 py-1 rounded-lg font-semibold border border-stone-200">
                 {branch.province}
               </span>
-              <span className="text-xs text-emerald-800 bg-emerald-50 px-3 py-1 rounded-lg font-bold border border-emerald-200 flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                Mitra AXI Adira Resmi Terdaftar OJK
+              <span className="text-[11px] text-emerald-800 bg-emerald-50 px-3 py-1 rounded-lg font-bold border border-emerald-200 flex items-center gap-1.5">
+                <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                <span>Resmi Terdaftar & Diawasi OJK</span>
               </span>
             </div>
 
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-stone-950 tracking-tight leading-tight">
-              {branch.name}
+              {displayName}
             </h1>
 
-            <div className="flex items-start sm:items-center gap-2 text-sm text-stone-600">
+            <div className="flex items-start sm:items-center gap-2 text-xs sm:text-sm text-stone-600">
               <MapPin className="w-4 h-4 text-amber-600 shrink-0 mt-0.5 sm:mt-0" />
-              <span className="leading-relaxed">{branch.address}, {branch.city}, {branch.province}</span>
+              <span className="leading-relaxed font-medium">{branch.city}, {branch.province}</span>
             </div>
           </div>
 
@@ -136,20 +129,11 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
           <div className="flex flex-col sm:flex-row lg:flex-col gap-2.5 shrink-0 min-w-[240px]">
             <button
               type="button"
-              onClick={() => openWhatsAppBranch(branch.name, branch.city, '6285288157752')}
-              className="w-full py-3.5 px-5 bg-[#FFCC00] hover:bg-[#F5C400] text-stone-950 font-extrabold text-sm rounded-xl flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer"
+              onClick={() => openWhatsAppBranch(branch.name, branch.city)}
+              className="w-full py-3.5 px-5 bg-[#FFCC00] hover:bg-[#F5C400] text-stone-950 font-extrabold text-xs sm:text-sm rounded-xl flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer"
             >
-              <MessageCircle className="w-4 h-4 fill-stone-950/20" />
+              <WhatsAppIcon className="w-4 h-4 text-emerald-900 shrink-0" />
               <span>Chat WhatsApp Cabang</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => openWhatsAppBranch(branch.name, branch.city, '6285288157752')}
-              className="w-full py-3 px-5 bg-emerald-50 hover:bg-emerald-100 text-emerald-950 border border-emerald-300 font-bold text-sm rounded-xl flex items-center justify-center gap-2 shadow-xs transition-all text-center cursor-pointer"
-            >
-              <MessageCircle className="w-4 h-4 text-emerald-700" />
-              <span>WhatsApp: 0852-8815-7752</span>
             </button>
 
             <div className="flex items-center gap-2">
@@ -157,7 +141,7 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
                 href={`https://www.google.com/maps/dir/?api=1&destination=${branch.coordinates.lat},${branch.coordinates.lng}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-2.5 px-3 bg-stone-900 hover:bg-stone-800 text-white font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs transition-all text-center"
+                className="flex-1 py-2.5 px-3 bg-stone-900 hover:bg-stone-800 text-white font-semibold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs transition-all text-center"
               >
                 <Navigation className="w-3.5 h-3.5" />
                 <span>Petunjuk Rute</span>
@@ -166,7 +150,7 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
               <button
                 type="button"
                 onClick={handleShare}
-                className="py-2.5 px-3 bg-white hover:bg-stone-100 text-stone-700 border border-stone-200 font-medium text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-2xs transition-all cursor-pointer"
+                className="py-2.5 px-3 bg-white hover:bg-stone-100 text-stone-700 border border-stone-200 font-semibold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-2xs transition-all cursor-pointer"
                 title="Salin tautan cabang ini"
               >
                 {copiedLink ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Share2 className="w-3.5 h-3.5" />}
@@ -177,8 +161,8 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
         </div>
       </div>
 
-      {/* Grid Layout: Left Column (Description, Services, Vehicle Criteria, Process) & Right Column (Location, Map, Hours, Contacts) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      {/* Grid Layout: Left Column (7 cols) & Right Column (5 cols) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-start">
         
         {/* Left Column (7 cols) */}
         <div className="lg:col-span-7 space-y-6">
@@ -191,7 +175,7 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
               </div>
               <div>
                 <h2 className="text-base font-bold text-stone-950">
-                  Deskripsi Lengkap Kantor Cabang {branch.shortName}
+                  Deskripsi Lengkap Kantor Cabang {displayName}
                 </h2>
                 <p className="text-xs text-stone-500">
                   Profil resmi, fungsi operasional, dan cakupan layanan pembiayaan
@@ -199,26 +183,26 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
               </div>
             </div>
 
-            <div className="prose prose-stone text-xs sm:text-sm text-stone-700 leading-relaxed space-y-4">
+            <div className="prose prose-stone text-xs sm:text-sm text-stone-700 leading-relaxed space-y-3.5">
               <p>
-                <strong>{branch.name}</strong> merupakan salah satu sentra layanan pembiayaan dan operasional resmi kemitraan <strong>AXI Adira Finance</strong> yang melayani nasabah di wilayah <strong>{branch.city}</strong>, Provinsi <strong>{branch.province}</strong>, dan sekitarnya. Kantor cabang ini hadir untuk memberikan solusi pembiayaan dana tunai cepat, aman, dan transparan melalui jaminan BPKB kendaraan bermotor dengan standar pengawasan langsung dari <strong>Otoritas Jasa Keuangan (OJK)</strong>.
+                <strong>{displayName}</strong> merupakan salah satu sentra layanan pembiayaan dan operasional resmi <strong>Adira Finance</strong> yang melayani nasabah di wilayah <strong>{branch.city}</strong>, Provinsi <strong>{branch.province}</strong>, dan sekitarnya. Kantor cabang ini hadir untuk memberikan solusi pembiayaan dana tunai cepat, aman, dan transparan melalui jaminan BPKB kendaraan bermotor dengan standar pengawasan langsung dari <strong>Otoritas Jasa Keuangan (OJK)</strong>.
               </p>
 
               <div className="p-4 bg-amber-50/70 border border-amber-200/80 rounded-2xl space-y-2">
                 <div className="font-bold text-stone-950 text-xs sm:text-sm flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-amber-700 shrink-0" />
-                  <span>Komitmen Layanan di {branch.name}:</span>
+                  <span>Komitmen Layanan di {displayName}:</span>
                 </div>
                 <ul className="text-xs space-y-1.5 text-stone-800 list-disc list-inside">
                   <li><strong>Taksasi Tertinggi:</strong> Plafon pinjaman hingga 85% dari nilai pasar kendaraan Anda saat ini.</li>
-                  <li><strong>Bunga Ringan & Kompetitif:</strong> Perhitungan angsuran flat/efektif bersahabat mulai dari 0,8% - 1,2% per bulan.</li>
+                  <li><strong>Bunga Ringan & Kompetitif:</strong> Perhitungan angsuran flat/efektif bersahabat mulai dari 0,75% per bulan.</li>
                   <li><strong>Tenor Fleksibel:</strong> Jangka waktu angsuran mulai dari 12, 24, 36, 48, hingga 60 bulan sesuai kemampuan finansial.</li>
                   <li><strong>Kendaraan Tetap Digunakan:</strong> Anda hanya menjaminkan BPKB asli, sementara unit kendaraan fisik tetap dapat Anda pakai sehari-hari untuk operasional dan usaha.</li>
                 </ul>
               </div>
 
               <p>
-                Di cabang <strong>{branch.shortName}</strong>, seluruh proses administrasi dan verifikasi berkas dirancang tanpa birokrasi rumit. Didukung oleh tim surveyor lapangan berpengalaman, kami menyediakan fasilitas <strong>layanan jemput berkas (home visit) bebas biaya transportasi</strong> langsung ke domisili tempat tinggal atau tempat usaha Anda di seluruh penjuru {branch.city}. Tim surveyor kami juga siap melakukan gesek nomor rangka dan nomor mesin kendaraan di tempat secara gratis tanpa pungutan liar.
+                Di cabang <strong>{displayName}</strong>, seluruh proses administrasi dan verifikasi berkas dirancang tanpa birokrasi rumit. Didukung oleh tim surveyor lapangan berpengalaman, kami menyediakan fasilitas <strong>layanan jemput berkas (home visit) bebas biaya transportasi</strong> langsung ke domisili tempat tinggal atau tempat usaha Anda di seluruh penjuru {branch.city}. Tim surveyor kami juga siap melakukan gesek nomor rangka dan nomor mesin kendaraan di tempat secara gratis tanpa pungutan liar.
               </p>
 
               <p>
@@ -227,13 +211,29 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
             </div>
 
             {/* Service Area Highlights */}
-            <div className="pt-3 border-t border-stone-100">
+            <div className="pt-3 border-t border-stone-100 space-y-3">
               <div className="flex items-start gap-2.5 text-xs text-stone-600 bg-stone-50 p-3.5 rounded-2xl border border-stone-200/80">
                 <Building2 className="w-4 h-4 text-stone-500 shrink-0 mt-0.5" />
                 <div>
                   <span className="font-bold text-stone-900 block mb-0.5">Cakupan Wilayah Layanan:</span>
                   <span>Melayani seluruh kecamatan, kelurahan, dan kawasan bisnis/residensial di {branch.city} dan kawasan penyangga sekitarnya di {branch.province}.</span>
                 </div>
+              </div>
+
+              {/* Menu/Teks "Hubungi kami" TEPAT DI BAWAH ELEMEN "CAKUPAN WILAYAH" */}
+              <div className="p-3 bg-emerald-50/80 rounded-2xl border border-emerald-200 flex flex-col sm:flex-row items-center justify-between gap-2.5">
+                <div className="flex items-center gap-2 text-xs text-emerald-950 font-bold">
+                  <WhatsAppIcon className="w-4 h-4 text-emerald-700 shrink-0" />
+                  <span>Hubungi Kami untuk Layanan Wilayah {branch.city}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => openWhatsAppBranch(branch.name, branch.city)}
+                  className="px-4 py-2 bg-[#FFCC00] hover:bg-[#F5C400] text-stone-950 font-extrabold text-xs rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center gap-1.5"
+                >
+                  <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-900" />
+                  <span>Hubungi Kami via WhatsApp</span>
+                </button>
               </div>
             </div>
           </div>
@@ -287,7 +287,7 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
                   Toyota, Daihatsu, Honda, Mitsubishi, Suzuki, Nissan, Hyundai, Wuling, dll.
                 </p>
                 <div className="text-[11px] text-stone-500 pt-1">
-                  Tenor s.d 60 bulan · Plafon hingga Rp 500 Juta+
+                  Tenor s.d 60 bulan · Plafon s/d 500 Juta
                 </div>
               </div>
 
@@ -323,12 +323,30 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
 
             </div>
 
-            {/* Note on Taxes and Plate */}
-            <div className="p-3 bg-stone-50 rounded-xl text-xs text-stone-600 border border-stone-200/70 flex items-center gap-2">
-              <Info className="w-4 h-4 text-stone-400 shrink-0" />
-              <span>
-                Pajak kendaraan mati/telat atau plat daerah lain di luar {branch.city}? Kami siap membantu proses perpanjangan pajak dan balik nama langsung dipotong dari dana pencairan.
-              </span>
+            {/* Note on Taxes and Plate: KETERANGAN PAJAK KENDARAAN */}
+            <div className="space-y-3 pt-1">
+              <div className="p-3 bg-stone-50 rounded-xl text-xs text-stone-600 border border-stone-200/70 flex items-center gap-2">
+                <Info className="w-4 h-4 text-stone-400 shrink-0" />
+                <span>
+                  <strong>Keterangan Pajak Kendaraan:</strong> Pajak kendaraan mati/telat atau plat daerah lain di luar {branch.city}? Kami siap membantu proses perpanjangan pajak dan balik nama langsung dipotong dari dana pencairan.
+                </span>
+              </div>
+
+              {/* Menu/Teks "Hubungi kami" TEPAT DI BAWAH ELEMEN "KETERANGAN PAJAK KENDARAAN" */}
+              <div className="p-3 bg-emerald-50/80 rounded-2xl border border-emerald-200 flex flex-col sm:flex-row items-center justify-between gap-2.5">
+                <div className="flex items-center gap-2 text-xs text-emerald-950 font-bold">
+                  <WhatsAppIcon className="w-4 h-4 text-emerald-700 shrink-0" />
+                  <span>Konsultasi Pajak & Taksasi Kendaraan</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => openWhatsAppBranch(branch.name, branch.city)}
+                  className="px-4 py-2 bg-[#FFCC00] hover:bg-[#F5C400] text-stone-950 font-extrabold text-xs rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center gap-1.5"
+                >
+                  <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-900" />
+                  <span>Hubungi Kami via WhatsApp</span>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -390,7 +408,7 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
                   4
                 </div>
                 <div className="space-y-1">
-                  <div className="text-xs font-bold text-stone-900">Pencairan Dana Langsung</div>
+                  <div className="text-xs font-bold text-stone-900">Proses Pencairan</div>
                   <div className="text-xs text-stone-600 leading-relaxed">
                     Dana tunai langsung ditransfer utuh ke rekening bank pemohon pada hari yang sama.
                   </div>
@@ -401,7 +419,7 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
 
         </div>
 
-        {/* Right Column (5 cols: Address card, Google Maps Embed, Operating Hours, Contact Info, Nearby Branches) */}
+        {/* Right Column: Location, Map, Operating Hours, Contacts, Nearby Branches (5 cols) */}
         <div className="lg:col-span-5 space-y-6">
 
           {/* Location & Map Card */}
@@ -415,23 +433,22 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
                 type="button"
                 onClick={handleCopyAddress}
                 className="text-[11px] font-bold text-stone-700 bg-stone-100 hover:bg-stone-200 px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1 cursor-pointer"
-                title="Salin Alamat Lengkap"
+                title="Salin Info Cabang"
               >
                 {copiedAddress ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-                <span>{copiedAddress ? 'Tersalin' : 'Salin Alamat'}</span>
+                <span>{copiedAddress ? 'Tersalin' : 'Salin Info'}</span>
               </button>
             </div>
 
             <div className="text-xs text-stone-700 bg-stone-50 p-3.5 rounded-2xl border border-stone-200/80 leading-relaxed">
-              <strong className="block text-stone-950 mb-1">{branch.name}</strong>
-              <p>{branch.address}</p>
-              <p className="text-stone-500 mt-1">{branch.city}, {branch.province} - Wilayah {branch.region}</p>
+              <strong className="block text-stone-950 mb-1">{displayName}</strong>
+              <p className="text-stone-500">{branch.city}, {branch.province} - Wilayah {branch.region}</p>
             </div>
 
             {/* Embedded Google Maps View for this exact branch */}
             <div className="w-full h-56 rounded-2xl overflow-hidden border border-stone-200 relative shadow-inner">
               <iframe
-                title={`Peta Lokasi ${branch.name}`}
+                title={`Peta Lokasi ${displayName}`}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -445,10 +462,10 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
             {/* Direct Google Maps External links */}
             <div className="grid grid-cols-2 gap-2 pt-1">
               <a
-                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(branch.name + ' ' + branch.address)}`}
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(displayName + ' ' + branch.city)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="py-2.5 px-3 bg-stone-900 hover:bg-stone-800 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors text-center"
+                className="py-2.5 px-3 bg-stone-900 hover:bg-stone-800 text-white font-semibold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors text-center"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
                 <span>Google Maps</span>
@@ -458,7 +475,7 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
                 href={`https://www.google.com/maps/dir/?api=1&destination=${branch.coordinates.lat},${branch.coordinates.lng}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="py-2.5 px-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors text-center"
+                className="py-2.5 px-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors text-center"
               >
                 <Navigation className="w-3.5 h-3.5" />
                 <span>Petunjuk Rute</span>
@@ -473,7 +490,7 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
               <span>Jam Operasional & Kontak Cabang</span>
             </h3>
 
-            <div className="space-y-3 text-xs">
+            <div className="space-y-2.5 text-xs">
               <div className="flex items-center justify-between p-3 rounded-xl bg-stone-50 border border-stone-200/70">
                 <span className="text-stone-500 font-medium">Jam Pelayanan Kantor:</span>
                 <span className="font-bold text-stone-900">{branch.hours}</span>
@@ -488,7 +505,7 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
                 <span className="text-stone-500 font-medium">Nomor WhatsApp Resmi:</span>
                 <button
                   type="button"
-                  onClick={() => openWhatsAppBranch(branch.name, branch.city, '6285288157752')}
+                  onClick={() => openWhatsAppBranch(branch.name, branch.city)}
                   className="font-extrabold text-emerald-800 hover:underline cursor-pointer"
                 >
                   0852-8815-7752
@@ -499,18 +516,19 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
             {/* Direct WhatsApp Callout */}
             <div className="p-4 bg-gradient-to-r from-amber-50 to-amber-100/60 rounded-2xl border border-amber-200 space-y-2">
               <div className="text-xs font-bold text-stone-900 flex items-center gap-1.5">
-                <MessageCircle className="w-4 h-4 text-emerald-700" />
+                <WhatsAppIcon className="w-4 h-4 text-emerald-700" />
                 <span>Pengajuan Dana Cepat di Cabang Ini</span>
               </div>
               <p className="text-[11px] text-stone-600 leading-relaxed">
-                Ingin simulasi angsuran atau mengatur jadwal surveyor datang ke rumah? Hubungi langsung customer service AXI resmi kami sekarang.
+                Ingin simulasi angsuran atau mengatur jadwal surveyor datang ke rumah? Hubungi langsung layanan resmi kami sekarang.
               </p>
               <button
                 type="button"
-                onClick={() => openWhatsAppBranch(branch.name, branch.city, '6285288157752')}
+                onClick={() => openWhatsAppBranch(branch.name, branch.city)}
                 className="w-full py-2.5 px-4 bg-[#FFCC00] hover:bg-[#F5C400] text-stone-950 font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-2xs transition-colors cursor-pointer"
               >
-                <span>Konsultasi Gratis via WhatsApp</span>
+                <WhatsAppIcon className="w-4 h-4 text-emerald-900" />
+                <span>Hubungi Kami via WhatsApp</span>
               </button>
             </div>
           </div>
@@ -525,10 +543,10 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
                     Cabang Lain di {branch.province}
                   </h3>
                 </div>
-                <span className="text-[10px] text-stone-400">Pilihan Terdekat</span>
+                <span className="text-[10px] text-stone-400 font-medium">Pilihan Terdekat</span>
               </div>
 
-              <div className="space-y-2.5">
+              <div className="space-y-2">
                 {nearbyBranches.map((nb) => (
                   <button
                     key={nb.id}
@@ -538,10 +556,10 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
                   >
                     <div className="space-y-0.5 min-w-0">
                       <div className="text-xs font-bold text-stone-900 group-hover:text-amber-950 truncate">
-                        {nb.name}
+                        {formatBranchDisplayName(nb)}
                       </div>
                       <div className="text-[11px] text-stone-500 truncate">
-                        {nb.city} · {nb.address}
+                        {nb.city}, {nb.province}
                       </div>
                     </div>
                     <ChevronRight className="w-4 h-4 text-stone-400 group-hover:text-stone-900 group-hover:translate-x-0.5 transition-all shrink-0 mt-1" />
@@ -552,29 +570,25 @@ export const CabangDetailView: React.FC<CabangDetailViewProps> = ({
           )}
 
         </div>
-
       </div>
 
-      {/* Bottom Back Button Banner */}
-      <div className="p-6 bg-white rounded-3xl border border-stone-200/90 shadow-2xs flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <AdiraLogo size="sm" variant="badge" />
-          <div>
-            <div className="text-xs font-bold text-stone-900">
-              Butuh mencari lokasi kantor cabang di kota atau provinsi lain?
-            </div>
-            <div className="text-[11px] text-stone-500">
-              Tersedia 515 kantor cabang kemitraan resmi AXI Adira di seluruh 38 provinsi Indonesia.
-            </div>
-          </div>
+      {/* Bottom Back Button & Network Stats Bar */}
+      <div className="bg-white rounded-3xl p-6 border border-stone-200/90 shadow-2xs flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="space-y-1 text-center sm:text-left">
+          <h4 className="text-sm font-bold text-stone-900">
+            Jaringan Nasional Terpercaya
+          </h4>
+          <p className="text-xs text-stone-500">
+            Tersedia 515 kantor cabang resmi di seluruh 38 provinsi Indonesia.
+          </p>
         </div>
 
         <button
           type="button"
           onClick={onBack}
-          className="py-2.5 px-5 bg-stone-900 hover:bg-stone-800 text-white font-bold text-xs rounded-xl flex items-center gap-2 transition-colors cursor-pointer shrink-0 shadow-xs"
+          className="px-5 py-2.5 bg-stone-900 hover:bg-stone-800 text-white font-bold text-xs rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer flex items-center gap-1.5"
         >
-          <ArrowLeft className="w-4 h-4" />
+          <ArrowLeft className="w-3.5 h-3.5" />
           <span>Kembali ke Peta & Daftar 515 Cabang</span>
         </button>
       </div>

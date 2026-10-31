@@ -1,7 +1,6 @@
 import React from 'react';
 import { openWhatsAppGeneral } from '../../utils/whatsapp';
 import { 
-  MessageCircle,
   ShieldCheck, 
   Award, 
   Users, 
@@ -14,12 +13,13 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { AdiraLogo } from '../common/AdiraLogo';
+import { WhatsAppLogo } from '../common/WhatsAppLogo';
 
 export const TentangKamiView: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
       
-      {/* BENTO ROW 1: PROFIL AXI & HIGHLIGHT STATS */}
+      {/* BENTO ROW 1: PROFIL & HIGHLIGHT STATS */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
         
         {/* Bento Overview Card (8 Cols) */}
@@ -33,26 +33,26 @@ export const TentangKamiView: React.FC = () => {
             </div>
 
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-stone-900 tracking-tight leading-tight text-balance">
-              Profil AXI Adira & Komitmen Layanan Terpercaya
+              Profil Adira Finance & Komitmen Layanan Terpercaya
             </h1>
 
             <p className="text-xs sm:text-sm text-stone-600 leading-relaxed max-w-xl">
-              <strong>AXI (Agen Xpress Inovatif)</strong> adalah komunitas agen dan mitra bisnis resmi dari PT Adira Dinamika Multi Finance Tbk, institusi pembiayaan terkemuka di Indonesia yang telah berizin dan diawasi oleh Otoritas Jasa Keuangan (OJK).
+              Kami merupakan jaringan kemitraan resmi dari PT Adira Dinamika Multi Finance Tbk, institusi pembiayaan terkemuka di Indonesia yang telah berizin dan diawasi oleh Otoritas Jasa Keuangan (OJK).
             </p>
 
             <p className="text-xs sm:text-sm text-stone-600 leading-relaxed max-w-xl">
-              Kami hadir sebagai jembatan kemudahan bagi masyarakat dan pelaku usaha yang memerlukan fasilitas dana tunai cepat, aman, dan tanpa potongan liar dengan jaminan BPKB kendaraan bermotor. BPKB Anda tersimpan di vault berstandar perbankan nasional.
+              Kami hadir sebagai jembatan kemudahan bagi masyarakat dan pelaku usaha yang memerlukan fasilitas dana tunai cepat, aman, dan tanpa potongan liar dengan jaminan BPKB kendaraan bermotor. BPKB Anda tersimpan di ruang arsip aman berstandar perbankan nasional.
             </p>
           </div>
 
           <div className="pt-2 flex flex-col sm:flex-row gap-3">
             <button
               type="button"
-              onClick={() => openWhatsAppGeneral('Pertanyaan Profil & Layanan AXI')}
+              onClick={() => openWhatsAppGeneral('Pertanyaan Profil & Layanan Adira Finance')}
               className="px-6 py-3.5 bg-[#FFCC00] hover:bg-[#F5C400] text-stone-950 font-bold text-xs rounded-xl transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer"
             >
-              <MessageCircle className="w-4 h-4 text-stone-950 fill-stone-950/20" />
-              <span>Hubungi Konsultan Mitra AXI</span>
+              <WhatsAppLogo className="w-4 h-4 shrink-0" />
+              <span>Hubungi Kami</span>
             </button>
           </div>
         </div>
@@ -69,9 +69,9 @@ export const TentangKamiView: React.FC = () => {
             />
           </div>
           <div className="p-5 space-y-1 bg-white">
-            <span className="text-xs font-bold text-stone-900 block">Konsultan Berdedikasi</span>
+            <span className="text-xs font-bold text-stone-900 block">Tim Resmi AXI Adira</span>
             <span className="text-[11px] text-stone-500 leading-relaxed block">
-              Mendampingi setiap langkah pengajuan dan pencairan secara ramah, transparan, dan profesional.
+              Sentra layanan pembiayaan dan pencairan dana tunai berizin OJK.
             </span>
           </div>
         </div>
@@ -130,7 +130,7 @@ export const TentangKamiView: React.FC = () => {
           <div className="p-4 rounded-2xl bg-[#FAF9F6] border border-stone-200/80 space-y-2">
             <h3 className="text-xs font-bold text-stone-900">2. Take Over BPKB</h3>
             <p className="text-xs text-stone-600 leading-relaxed">
-              Pengalihan pinjaman berjalan dari leasing/bank lain ke AXI Adira untuk mendapatkan cicilan lebih ringan dan sisa dana tambahan.
+              Pengalihan pinjaman berjalan dari leasing/bank lain ke Adira Finance untuk mendapatkan cicilan lebih ringan dan sisa dana tambahan.
             </p>
           </div>
 
@@ -161,7 +161,7 @@ export const TentangKamiView: React.FC = () => {
             Konsultasikan Kebutuhan Dana BPKB Anda
           </h3>
           <p className="text-xs text-stone-300 leading-relaxed">
-            Staf konsultan resmi AXI Adira siap memberikan penjelasan simulasi, pengecekan kelayakan unit, dan pendampingan berkas secara gratis.
+            Staf konsultan resmi Adira Finance siap memberikan penjelasan simulasi, pengecekan kelayakan unit, dan pendampingan berkas secara gratis.
           </p>
         </div>
 
@@ -171,8 +171,8 @@ export const TentangKamiView: React.FC = () => {
             onClick={() => openWhatsAppGeneral('Konsultasi Tentang Kami')}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#FFCC00] hover:bg-[#F5C400] text-stone-950 font-bold text-xs rounded-xl transition-colors shadow-xs cursor-pointer"
           >
-            <MessageCircle className="w-4 h-4 text-stone-950 fill-stone-950/20" />
-            <span>Chat WA: 0852-8815-7752</span>
+            <WhatsAppLogo className="w-4 h-4 shrink-0" />
+            <span>Hubungi Kami: 0852-8815-7752</span>
           </button>
         </div>
       </div>

@@ -25,10 +25,10 @@ export const VEHICLE_CRITERIA: Record<string, VehicleRequirement> = {
     title: 'Gadai BPKB Mobil',
     minYear: 2010,
     maxTenorMonths: 60,
-    maxPlafondMillion: 1500,
+    maxPlafondMillion: 500,
     interestRatePerMonth: 0.75,
     popularModels: ['Toyota Avanza, Innova, Fortuner', 'Honda Brio, HR-V, CR-V', 'Mitsubishi Pajero, Xpander', 'Daihatsu Xenia, Terios', 'Suzuki Ertiga, Baleno'],
-    description: 'Solusi dana besar berjangka panjang untuk mobil penumpang (Sedan, MPV, SUV) minimal keluaran tahun 2010.'
+    description: 'Solusi dana besar berjangka panjang untuk mobil penumpang (Sedan, MPV, SUV) minimal keluaran tahun 2010 plafon s/d 500 Juta.'
   },
   truck: {
     type: 'truck',

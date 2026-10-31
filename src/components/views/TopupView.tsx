@@ -2,7 +2,6 @@ import React from 'react';
 import { openWhatsAppGeneral } from '../../utils/whatsapp';
 import { 
   ArrowRight, 
-  MessageCircle, 
   Clock, 
   ShieldCheck, 
   TrendingUp, 
@@ -13,6 +12,7 @@ import {
   FileCheck2
 } from 'lucide-react';
 import { AdiraLogo } from '../common/AdiraLogo';
+import { WhatsAppLogo } from '../common/WhatsAppLogo';
 
 interface TopupViewProps {
   onOpenApplication: (service?: 'Top Up') => void;
@@ -53,7 +53,7 @@ export const TopupView: React.FC<TopupViewProps> = ({ onOpenApplication }) => {
               <div className="p-3.5 bg-[#FAF9F6] rounded-2xl border border-stone-200/80 space-y-1">
                 <FolderLock className="w-4 h-4 text-stone-800" />
                 <span className="font-bold text-stone-900 block">Tanpa Tarik Berkas</span>
-                <span className="text-stone-500 text-[11px] block">BPKB sudah tersimpan di vault.</span>
+                <span className="text-stone-500 text-[11px] block">BPKB tersimpan di ruang arsip aman.</span>
               </div>
 
               <div className="p-3.5 bg-[#FAF9F6] rounded-2xl border border-stone-200/80 space-y-1">
@@ -79,8 +79,8 @@ export const TopupView: React.FC<TopupViewProps> = ({ onOpenApplication }) => {
               onClick={() => openWhatsAppGeneral('Top Up Pinjaman BPKB Nasabah Aktif')}
               className="px-5 py-3.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-950 font-bold text-xs rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer"
             >
-              <MessageCircle className="w-4 h-4 text-emerald-700" />
-              <span>WhatsApp: 0852-8815-7752</span>
+              <WhatsAppLogo className="w-4 h-4 shrink-0" />
+              <span>Hubungi Kami: 0852-8815-7752</span>
             </button>
           </div>
         </div>
@@ -90,7 +90,7 @@ export const TopupView: React.FC<TopupViewProps> = ({ onOpenApplication }) => {
           <div className="space-y-3">
             <div className="flex items-center gap-2 text-stone-900 font-bold text-sm">
               <Sparkles className="w-4 h-4 text-amber-500" />
-              <span>Prioritas Nasabah Setia AXI</span>
+              <span>Prioritas Nasabah Setia Adira Finance</span>
             </div>
             <p className="text-xs text-stone-500 leading-relaxed">
               Dapatkan perlakuan jalur cepat (*fast-track approval*) untuk nasabah dengan riwayat bayar tepat waktu.
@@ -117,7 +117,7 @@ export const TopupView: React.FC<TopupViewProps> = ({ onOpenApplication }) => {
             <div className="flex items-start gap-3 p-3 bg-[#FAF9F6] rounded-2xl border border-stone-200/80">
               <ShieldCheck className="w-4 h-4 text-stone-800 shrink-0 mt-0.5" />
               <div>
-                <span className="font-bold text-stone-900 block">BPKB Tetap Aman di Vault</span>
+                <span className="font-bold text-stone-900 block">BPKB Tetap Aman di Ruang Arsip</span>
                 <span className="text-stone-500 text-[11px]">Tidak perlu repot serah terima dokumen fisik baru karena BPKB telah tersimpan rapi.</span>
               </div>
             </div>

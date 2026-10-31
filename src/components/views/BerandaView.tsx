@@ -15,6 +15,7 @@ import {
   PhoneCall
 } from 'lucide-react';
 import { AdiraLogo } from '../common/AdiraLogo';
+import { WhatsAppIcon } from '../common/WhatsAppIcon';
 import { ApplicationForm } from '../common/ApplicationForm';
 
 interface BerandaViewProps {
@@ -99,19 +100,21 @@ export const BerandaView: React.FC<BerandaViewProps> = ({
 
             <button
               type="button"
-              onClick={() => openWhatsAppGeneral('Pertanyaan Gadai BPKB')}
+              onClick={() => openWhatsAppGeneral()}
               className="px-5 py-3.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-950 font-bold text-xs rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer"
             >
-              <MessageCircle className="w-4 h-4 text-emerald-700" />
+              <WhatsAppIcon className="w-4 h-4 text-emerald-700" />
               <span>WhatsApp: 0852-8815-7752</span>
             </button>
-
 
           </div>
 
           {/* Subtext */}
           <div className="pt-2 flex flex-wrap items-center gap-3 text-[11px] text-stone-500 border-t border-stone-100">
-            <span>Resmi Mitra AXI</span>
+            <span className="flex items-center gap-1 text-emerald-800 font-semibold">
+              <WhatsAppIcon className="w-3 h-3 text-emerald-600" />
+              <span>Hubungi Kami</span>
+            </span>
             <span aria-hidden="true">·</span>
             <span>Diawasi OJK</span>
             <span aria-hidden="true">·</span>
@@ -134,10 +137,10 @@ export const BerandaView: React.FC<BerandaViewProps> = ({
             <Clock className="w-5 h-5 text-amber-700" />
           </div>
           <h3 className="text-sm font-bold text-stone-900 tracking-tight">
-            Proses Cepat 1 Hari Kerja
+            Proses Pencairan Cepat
           </h3>
           <p className="text-xs text-stone-600 leading-relaxed">
-            Verifikasi berkas secara online. Begitu fisik kendaraan divalidasi, dana langsung cair ke rekening tabungan Anda.
+            Verifikasi berkas secara online. Begitu fisik kendaraan divalidasi, proses pencairan dana langsung cair ke rekening tabungan Anda.
           </p>
         </div>
 
@@ -163,6 +166,11 @@ export const BerandaView: React.FC<BerandaViewProps> = ({
           <p className="text-xs text-stone-600 leading-relaxed">
             BPKB asli tersimpan aman di vault berstandar perbankan institusi resmi berizin OJK dan langsung diserahkan saat lunas.
           </p>
+          {/* Keterangan Vault Sesuai Permintaan Klien */}
+          <div className="p-2.5 bg-emerald-50/80 border border-emerald-200/80 rounded-xl text-[11px] text-emerald-950">
+            <strong className="block font-bold text-emerald-900 mb-0.5">Keterangan Vault:</strong>
+            Ruang khazanah brankas anti-api bersertifikasi dengan pengawasan CCTV 24 jam & asuransi dokumen resmi.
+          </div>
         </div>
 
         <div className="bg-white p-6 rounded-3xl border border-stone-200/90 shadow-2xs space-y-3">
@@ -391,20 +399,19 @@ export const BerandaView: React.FC<BerandaViewProps> = ({
             Butuh Pencairan Dana Mendesak?
           </h3>
           <p className="text-xs text-stone-300 leading-relaxed">
-            Staf mitra resmi AXI Adira siap memberikan taksasi estimasi nilai pencairan unit kendaraan Anda langsung melalui WhatsApp 7 hari seminggu.
+            Konsultan resmi kami siap memberikan taksasi estimasi nilai pencairan unit kendaraan Anda langsung melalui WhatsApp 7 hari seminggu.
           </p>
         </div>
 
         <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full md:w-auto">
 
-
           <button
             type="button"
-            onClick={() => openWhatsAppGeneral('Konsultasi Mendesak')}
+            onClick={() => openWhatsAppGeneral()}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#FFCC00] hover:bg-[#F5C400] text-stone-950 font-bold text-xs rounded-xl transition-colors shadow-xs cursor-pointer"
           >
-            <MessageCircle className="w-4 h-4 text-stone-950 fill-stone-950/20" />
-            <span>Chat WA: 0852-8815-7752</span>
+            <WhatsAppIcon className="w-4 h-4 text-emerald-800" />
+            <span>Hubungi Kami: 0852-8815-7752</span>
           </button>
           
           <button

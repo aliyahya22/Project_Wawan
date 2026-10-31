@@ -49,6 +49,7 @@ export interface ApplicationFormData {
   fullName: string;
   whatsappNumber: string;
   collateralType: string;
+  vehicleTypeDetail?: string; // Tipe lengkap kendaraan
   vehicleYear: string;
   address: string;
 }
@@ -60,6 +61,7 @@ export interface LeadSubmission {
   fullName: string;
   whatsappNumber: string;
   collateralType: string;
+  vehicleTypeDetail?: string;
   vehicleYear: string;
   address: string;
   status: SubmissionStatus;

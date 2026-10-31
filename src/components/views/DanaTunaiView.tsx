@@ -6,7 +6,6 @@ import {
   Car, 
   Bike, 
   Truck, 
-  MessageCircle, 
   ArrowRight, 
   ShieldCheck, 
   CheckCircle2, 
@@ -18,6 +17,7 @@ import {
   Banknote 
 } from 'lucide-react';
 import { AdiraLogo } from '../common/AdiraLogo';
+import { WhatsAppLogo } from '../common/WhatsAppLogo';
 
 interface DanaTunaiViewProps {
   onOpenApplication: (vehicleType?: VehicleType) => void;
@@ -93,8 +93,8 @@ export const DanaTunaiView: React.FC<DanaTunaiViewProps> = ({ onOpenApplication 
               onClick={() => openWhatsAppGeneral('Pinjaman Dana Tunai BPKB')}
               className="px-5 py-3.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-950 font-bold text-xs rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer"
             >
-              <MessageCircle className="w-4 h-4 text-emerald-700" />
-              <span>WhatsApp: 0852-8815-7752</span>
+              <WhatsAppLogo className="w-4 h-4 shrink-0" />
+              <span>Hubungi Kami: 0852-8815-7752</span>
             </button>
           </div>
         </div>

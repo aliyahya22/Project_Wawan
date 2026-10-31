@@ -12,17 +12,17 @@ export interface SeoConfig {
 
 export const PAGE_SEO_MAP: Record<ActivePage, SeoConfig> = {
   beranda: {
-    title: 'Dana Cepat BPKB Adira - Pinjaman Jaminan BPKB Motor & Mobil Resmi AXI',
+    title: 'Dana Cepat BPKB Adira - Pinjaman Jaminan BPKB Motor & Mobil Resmi',
     description: 'Solusi pencairan dana tunai cepat jaminan BPKB Motor (min. 2017), Mobil (min. 2010), Truk & Pickup. Hotline WhatsApp resmi 0852-8815-7752 di 515 cabang se-Indonesia.',
     canonicalUrl: 'https://danacepatbpkb.id/',
-    keywords: 'dana cepat bpkb, gadai bpkb motor, gadai bpkb mobil, pinjaman bpkb adira, mitra axi adira, dana tunai bpkb',
+    keywords: 'dana cepat bpkb, gadai bpkb motor, gadai bpkb mobil, pinjaman bpkb adira, mitra resmi adira, dana tunai bpkb',
     breadcrumbs: [
       { name: 'Beranda', url: 'https://danacepatbpkb.id/' }
     ]
   },
   'dana-tunai': {
     title: 'Pinjaman Dana Tunai Jaminan BPKB Motor & Mobil - Plafon Hingga 90% Taksiran',
-    description: 'Ajukan pinjaman dana tunai jaminan BPKB Motor & Mobil dengan suku bunga kompetitif, proses persetujuan cepat 1 hari, dan kendaraan tetap Anda gunakan.',
+    description: 'Ajukan pinjaman dana tunai jaminan BPKB Motor & Mobil dengan suku bunga kompetitif, proses pencairan cepat, dan kendaraan tetap Anda gunakan.',
     canonicalUrl: 'https://danacepatbpkb.id/#dana-tunai',
     keywords: 'pinjaman dana tunai, gadai bpkb mobil, gadai bpkb motor, pencairan cepat bpkb, syarat gadai bpkb adira',
     breadcrumbs: [
@@ -52,7 +52,7 @@ export const PAGE_SEO_MAP: Record<ActivePage, SeoConfig> = {
   },
   cabang: {
     title: '515 Lokasi Kantor Cabang Adira Finance Terdekat - Seluruh Wilayah Indonesia',
-    description: 'Temukan alamat, nomor telepon, jam operasional, dan kontak WhatsApp resmi 515 kantor cabang Mitra AXI Adira Finance di kota dan kabupaten seluruh Indonesia.',
+    description: 'Temukan alamat, nomor telepon, jam operasional, dan kontak WhatsApp resmi 515 kantor cabang Adira Finance di kota dan kabupaten seluruh Indonesia.',
     canonicalUrl: 'https://danacepatbpkb.id/#cabang',
     keywords: 'kantor cabang adira finance, alamat adira terdekat, nomor telepon adira, cabang adira jakarta surabaya bandung medan',
     breadcrumbs: [
@@ -62,7 +62,7 @@ export const PAGE_SEO_MAP: Record<ActivePage, SeoConfig> = {
   },
   artikel: {
     title: 'Artikel & Panduan Finansial Gadai BPKB - Tips Cerdas Keuangan & Kredit Aman',
-    description: 'Kumpulan tips, panduan hukum, syarat administrasi, dan simulasi kredit gadai BPKB motor, mobil, dan take over resmi dari pakar kemitraan AXI.',
+    description: 'Kumpulan tips, panduan hukum, syarat administrasi, dan simulasi kredit gadai BPKB motor, mobil, dan take over resmi Adira Finance.',
     canonicalUrl: 'https://danacepatbpkb.id/#artikel',
     keywords: 'tips gadai bpkb, syarat gadai bpkb, simulasi pinjaman bpkb, panduan kredit mobil, artikel keuangan adira',
     breadcrumbs: [
@@ -71,10 +71,10 @@ export const PAGE_SEO_MAP: Record<ActivePage, SeoConfig> = {
     ]
   },
   'tentang-kami': {
-    title: 'Tentang Kami - Kemitraan Resmi AXI Adira Dinamika Multi Finance Tbk',
-    description: 'Profil resmi kemitraan Agen AXI Adira Finance terpercaya. Layanan terdaftar dan diawasi oleh OJK, berkomitmen memberikan solusi finansial transparan dan cepat.',
+    title: 'Tentang Kami - Kemitraan Resmi Adira Dinamika Multi Finance Tbk',
+    description: 'Profil resmi kemitraan Adira Finance terpercaya. Layanan terdaftar dan diawasi oleh OJK, berkomitmen memberikan solusi finansial transparan dan cepat.',
     canonicalUrl: 'https://danacepatbpkb.id/#tentang-kami',
-    keywords: 'tentang axi adira, mitra resmi adira finance, agen adira bpkb terpercaya, legalitas ojk adira',
+    keywords: 'tentang adira finance, mitra resmi adira finance, agen adira bpkb terpercaya, legalitas ojk adira',
     breadcrumbs: [
       { name: 'Beranda', url: 'https://danacepatbpkb.id/' },
       { name: 'Tentang Kami', url: 'https://danacepatbpkb.id/#tentang-kami' }
@@ -167,7 +167,7 @@ export function updateRouteSeo(page: ActivePage) {
 
 export function updateBranchSeo(branch: FullBranch) {
   const title = `Kantor Cabang ${branch.name} (${branch.city}) · Dana Cepat BPKB Adira`;
-  const description = `Alamat kantor cabang ${branch.name} di ${branch.city}, ${branch.province}. Layanan gadai BPKB motor, mobil, truk, dan pickup resmi Mitra AXI Adira Finance. Jam buka: ${branch.hours}. Hubungi WhatsApp: ${branch.whatsapp}.`;
+  const description = `Alamat kantor cabang ${branch.name} di ${branch.city}, ${branch.province}. Layanan gadai BPKB motor, mobil, truk, dan pickup resmi Adira Finance. Jam buka: ${branch.hours}. Hubungi WhatsApp: ${branch.whatsapp}.`;
   
   const slug = branch.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
   const branchUrl = `https://danacepatbpkb.id/#cabang/${branch.city.toLowerCase()}/${slug}`;

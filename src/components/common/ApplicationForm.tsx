@@ -2,15 +2,14 @@ import React, { useState, useMemo } from 'react';
 import { ApplicationFormData } from '../../types';
 import { 
   User, 
-  MessageCircle, 
   Car, 
   Calendar, 
   MapPin, 
   CheckCircle2, 
   AlertCircle 
 } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { openWhatsAppApplication } from '../../utils/whatsapp';
-
 import { useCms } from '../../context/CmsContext';
 
 interface ApplicationFormProps {
@@ -32,6 +31,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
     fullName: '',
     whatsappNumber: '',
     collateralType: initialCollateral || '',
+    vehicleTypeDetail: '',
     vehicleYear: '',
     address: '',
   });
@@ -42,25 +42,25 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
   const collateralOptions = [
     { 
       value: 'BPKB Motor', 
-      label: `BPKB Motor (Minimal Tahun ${vehicleCriteria.motor?.minYear || 2017})`, 
+      label: 'BPKB Motor', 
       minYear: vehicleCriteria.motor?.minYear || 2017,
       type: 'Motor'
     },
     { 
       value: 'BPKB Mobil', 
-      label: `BPKB Mobil (Minimal Tahun ${vehicleCriteria.mobil?.minYear || 2010})`, 
+      label: 'BPKB Mobil', 
       minYear: vehicleCriteria.mobil?.minYear || 2010,
       type: 'Mobil'
     },
     { 
       value: 'BPKB Truk', 
-      label: `BPKB Truk (Minimal Tahun ${vehicleCriteria.truck?.minYear || 2019})`, 
+      label: 'BPKB Truk', 
       minYear: vehicleCriteria.truck?.minYear || 2019,
       type: 'Truk'
     },
     { 
       value: 'BPKB Pickup', 
-      label: `BPKB Pickup (Minimal Tahun ${vehicleCriteria.pickup?.minYear || 2019})`, 
+      label: 'BPKB Pickup', 
       minYear: vehicleCriteria.pickup?.minYear || 2019,
       type: 'Pickup'
     },
@@ -69,19 +69,13 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
   // Selected collateral helper
   const selectedCollateral = collateralOptions.find((c) => c.value === formData.collateralType);
 
-  // Year options list dynamically tailored to selected collateral type
+  // Year options based on selected vehicle criteria (Mobil min. 2010, Motor min. 2017, etc.)
   const currentYear = new Date().getFullYear();
   const yearOptions = useMemo(() => {
     const min = selectedCollateral ? selectedCollateral.minYear : 2010;
     const list: string[] = [];
     for (let y = currentYear; y >= min; y--) {
       list.push(y.toString());
-    }
-    // Also add option for older years with disclaimer
-    if (min > 2010) {
-      for (let y = min - 1; y >= 2010; y--) {
-        list.push(`${y} (Perlu Review Khusus)`);
-      }
     }
     return list;
   }, [selectedCollateral, currentYear]);
@@ -113,6 +107,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
       fullName: '',
       whatsappNumber: '',
       collateralType: initialCollateral || '',
+      vehicleTypeDetail: '',
       vehicleYear: '',
       address: '',
     });
@@ -146,6 +141,12 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
             <span className="text-stone-500">Jaminan:</span>
             <span className="font-semibold text-stone-900">{formData.collateralType} ({formData.vehicleYear})</span>
           </div>
+          {formData.vehicleTypeDetail && (
+            <div className="flex justify-between">
+              <span className="text-stone-500">Tipe Lengkap:</span>
+              <span className="font-semibold text-stone-900">{formData.vehicleTypeDetail}</span>
+            </div>
+          )}
           <div className="flex justify-between">
             <span className="text-stone-500">Domisili:</span>
             <span className="font-medium text-stone-900">{formData.address}</span>
@@ -158,7 +159,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
             onClick={() => openWhatsAppApplication(formData)}
             className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#FFCC00] hover:bg-[#F5C400] text-stone-950 font-bold text-xs rounded-xl shadow-xs transition-colors w-full sm:w-auto"
           >
-            <MessageCircle className="w-4 h-4 text-stone-950" />
+            <WhatsAppIcon className="w-4 h-4 text-emerald-800" />
             <span>Kirim Ulang ke WhatsApp</span>
           </button>
 
@@ -176,7 +177,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
 
   return (
     <div className={`w-full max-w-xl mx-auto ${isEmbedded ? '' : ''}`}>
-      {/* Header matching user uploaded image */}
+      {/* Header */}
       {showTitle && (
         <div className="mb-6 space-y-1.5 text-left">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
@@ -208,7 +209,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
         {/* 2. Nomor WhatsApp */}
         <div className="space-y-1.5">
           <label className="flex items-center gap-2 text-sm font-bold text-stone-900">
-            <MessageCircle className="w-4 h-4 text-amber-600 shrink-0" />
+            <WhatsAppIcon className="w-4 h-4 text-emerald-600 shrink-0" />
             <span>Nomor WhatsApp</span>
           </label>
           <input
@@ -223,9 +224,8 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
 
         {/* Kriteria Tahun Resmi Badges */}
         <div className="p-3 bg-[#FAF9F6] rounded-2xl border border-stone-200/80 space-y-1.5">
-          <div className="text-[11px] font-bold text-stone-500 uppercase tracking-wider flex items-center justify-between">
+          <div className="text-[11px] font-bold text-stone-500 uppercase tracking-wider">
             <span>Standar Minimal Tahun Kendaraan:</span>
-            <span className="text-[10px] text-amber-700 font-semibold bg-amber-50 px-2 py-0.5 rounded border border-amber-200">Mitra AXI</span>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 text-xs">
             <div className="bg-white p-2 rounded-xl border border-stone-200/70 text-center">
@@ -286,7 +286,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
             </div>
           </div>
 
-          {/* Tahun Kendaraan */}
+          {/* Tahun Kendaraan (2010-2016 dihapus sesuai revisi) */}
           <div className="space-y-1.5">
             <label className="flex items-center gap-2 text-sm font-bold text-stone-900">
               <Calendar className="w-4 h-4 text-amber-600 shrink-0" />
@@ -317,17 +317,33 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
           </div>
         </div>
 
-        {/* Optional gentle criteria hint */}
+        {/* 4. Tipe Lengkap Kendaraan (Input Baru Sesuai Instruksi Klien) */}
+        <div className="space-y-1.5">
+          <label className="flex items-center gap-2 text-sm font-bold text-stone-900">
+            <Car className="w-4 h-4 text-amber-600 shrink-0" />
+            <span>Tipe Lengkap Kendaraan</span>
+          </label>
+          <input
+            type="text"
+            required
+            placeholder="Contoh: Toyota Avanza 1.3 G M/T atau Honda Vario 160 CBS"
+            value={formData.vehicleTypeDetail || ''}
+            onChange={(e) => setFormData({ ...formData, vehicleTypeDetail: e.target.value })}
+            className="w-full px-4 py-3 text-sm bg-white border border-stone-200/90 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 text-stone-900 placeholder:text-stone-400 shadow-2xs transition-all"
+          />
+        </div>
+
+        {/* Optional criteria hint */}
         {isBelowCriteria && selectedCollateral && (
           <div className="flex items-start gap-2 p-3 bg-amber-50 rounded-xl border border-amber-200 text-stone-800 text-xs">
             <AlertCircle className="w-4 h-4 shrink-0 text-amber-700 mt-0.5" />
             <div>
-              <span className="font-semibold">Perhatian:</span> Standar minimal resmi {selectedCollateral.value} adalah <strong>tahun {selectedCollateral.minYear}</strong>. Unit kendaraan Anda di bawah standar tahun tetap dapat kami konsultasikan untuk pengecekan kondisi mesin & kelayakan fisik khusus.
+              <span className="font-semibold">Perhatian:</span> Standar minimal resmi {selectedCollateral.value} adalah <strong>tahun {selectedCollateral.minYear}</strong>.
             </div>
           </div>
         )}
 
-        {/* 4. Alamat Domisili */}
+        {/* 5. Alamat Domisili */}
         <div className="space-y-1.5">
           <label className="flex items-center gap-2 text-sm font-bold text-stone-900">
             <MapPin className="w-4 h-4 text-amber-600 shrink-0" />
@@ -343,14 +359,14 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
           />
         </div>
 
-        {/* 5. Tombol Kirim Pengajuan with WhatsApp icon */}
+        {/* 6. Tombol Kirim Pengajuan with WhatsApp icon */}
         <div className="pt-2">
           <button
             type="submit"
             className="w-full py-3.5 px-6 rounded-xl font-bold text-base text-stone-950 bg-[#FFCC00] hover:bg-[#F5C400] active:bg-[#E6B800] transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>Kirim Pengajuan</span>
-            <MessageCircle className="w-4 h-4 text-stone-950 fill-stone-950/20" />
+            <WhatsAppIcon className="w-4 h-4 text-emerald-900" />
           </button>
         </div>
       </form>
