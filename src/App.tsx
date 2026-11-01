@@ -25,12 +25,29 @@ function MainAppContent() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [legalModalType, setLegalModalType] = useState<'syarat' | 'privasi' | null>(null);
 
-  // Deep-linking / SEO hash sync on initial load & popstate
+  // Deep-linking / SEO hash & query sync on initial load & popstate
   useEffect(() => {
     const parseHashRoute = () => {
+      const searchParams = new URLSearchParams(window.location.search);
+      const cabangParam = searchParams.get('cabang');
+      if (cabangParam) {
+        setActivePage('cabang');
+        return;
+      }
+
+      const pageParam = searchParams.get('page') as ActivePage | null;
+      const validPages: ActivePage[] = ['beranda', 'dana-tunai', 'take-over', 'topup', 'cabang', 'artikel', 'tentang-kami'];
+      if (pageParam && validPages.includes(pageParam)) {
+        setActivePage(pageParam);
+        return;
+      }
+
       const hash = window.location.hash.replace('#', '').toLowerCase();
       if (!hash) return;
-      const validPages: ActivePage[] = ['beranda', 'dana-tunai', 'take-over', 'topup', 'cabang', 'artikel', 'tentang-kami'];
+      if (hash.startsWith('cabang') || hash.includes('br-')) {
+        setActivePage('cabang');
+        return;
+      }
       const matched = validPages.find(p => hash === p || hash.startsWith(p + '/'));
       if (matched) {
         setActivePage(matched);
@@ -39,7 +56,11 @@ function MainAppContent() {
 
     parseHashRoute();
     window.addEventListener('popstate', parseHashRoute);
-    return () => window.removeEventListener('popstate', parseHashRoute);
+    window.addEventListener('hashchange', parseHashRoute);
+    return () => {
+      window.removeEventListener('popstate', parseHashRoute);
+      window.removeEventListener('hashchange', parseHashRoute);
+    };
   }, []);
 
   // Hidden discrete keyboard shortcut to access CMS portal: Ctrl + Shift + A (or Cmd + Shift + A)

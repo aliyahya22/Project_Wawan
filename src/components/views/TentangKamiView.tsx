@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { AdiraLogo } from '../common/AdiraLogo';
 import { WhatsAppLogo } from '../common/WhatsAppLogo';
+import consultantImg from '../../assets/images/adira_axi_consultant_1792156568463.jpg';
 
 export const TentangKamiView: React.FC = () => {
   return (
@@ -61,11 +62,13 @@ export const TentangKamiView: React.FC = () => {
         <div className="lg:col-span-4 bg-white rounded-3xl border border-stone-200/90 shadow-2xs overflow-hidden flex flex-col justify-between">
           <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-stone-100">
             <img
-              src="/src/assets/images/adira_axi_consultant_1792156568463.jpg"
+              src={consultantImg}
               alt="Konsultan profesional AXI melayani nasabah dengan ramah"
               className="w-full h-full object-cover"
               loading="eager"
-              referrerPolicy="no-referrer"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = '/adira_axi_consultant_1792156568463.jpg';
+              }}
             />
           </div>
           <div className="p-5 space-y-1 bg-white">

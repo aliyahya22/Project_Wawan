@@ -14,70 +14,70 @@ export const PAGE_SEO_MAP: Record<ActivePage, SeoConfig> = {
   beranda: {
     title: 'Dana Cepat BPKB Adira - Pinjaman Jaminan BPKB Motor & Mobil Resmi',
     description: 'Solusi pencairan dana tunai cepat jaminan BPKB Motor (min. 2017), Mobil (min. 2010), Truk & Pickup. Hotline WhatsApp resmi 0852-8815-7752 di 515 cabang se-Indonesia.',
-    canonicalUrl: 'https://danacepatbpkb.id/',
+    canonicalUrl: 'https://gadaibpkbterdekat.com/',
     keywords: 'dana cepat bpkb, gadai bpkb motor, gadai bpkb mobil, pinjaman bpkb adira, mitra resmi adira, dana tunai bpkb',
     breadcrumbs: [
-      { name: 'Beranda', url: 'https://danacepatbpkb.id/' }
+      { name: 'Beranda', url: 'https://gadaibpkbterdekat.com/' }
     ]
   },
   'dana-tunai': {
     title: 'Pinjaman Dana Tunai Jaminan BPKB Motor & Mobil - Plafon Hingga 90% Taksiran',
     description: 'Ajukan pinjaman dana tunai jaminan BPKB Motor & Mobil dengan suku bunga kompetitif, proses pencairan cepat, dan kendaraan tetap Anda gunakan.',
-    canonicalUrl: 'https://danacepatbpkb.id/#dana-tunai',
+    canonicalUrl: 'https://gadaibpkbterdekat.com/?page=dana-tunai',
     keywords: 'pinjaman dana tunai, gadai bpkb mobil, gadai bpkb motor, pencairan cepat bpkb, syarat gadai bpkb adira',
     breadcrumbs: [
-      { name: 'Beranda', url: 'https://danacepatbpkb.id/' },
-      { name: 'Dana Tunai BPKB', url: 'https://danacepatbpkb.id/#dana-tunai' }
+      { name: 'Beranda', url: 'https://gadaibpkbterdekat.com/' },
+      { name: 'Dana Tunai BPKB', url: 'https://gadaibpkbterdekat.com/?page=dana-tunai' }
     ]
   },
   'take-over': {
     title: 'Take Over BPKB Mobil & Motor Resmi - Pindah Kredit Leasing Bunga Lebih Ringan',
     description: 'Layanan take over kredit BPKB dari leasing atau bank lain. Dapatkan pelunasan sisa pokok kredit, cicilan lebih ringan, dan tambahan dana segar.',
-    canonicalUrl: 'https://danacepatbpkb.id/#take-over',
+    canonicalUrl: 'https://gadaibpkbterdekat.com/?page=take-over',
     keywords: 'take over bpkb, take over kredit mobil, take over bpkb motor, pindah leasing adira, dana tambahan take over',
     breadcrumbs: [
-      { name: 'Beranda', url: 'https://danacepatbpkb.id/' },
-      { name: 'Take Over BPKB', url: 'https://danacepatbpkb.id/#take-over' }
+      { name: 'Beranda', url: 'https://gadaibpkbterdekat.com/' },
+      { name: 'Take Over BPKB', url: 'https://gadaibpkbterdekat.com/?page=take-over' }
     ]
   },
   topup: {
     title: 'Top Up Pinjaman BPKB Adira - Tambah Plafon Kredit Angsuran Lancar',
     description: 'Nikmati fasilitas top up dana pinjaman bagi nasabah aktif dengan riwayat angsuran lancar. Tanpa survei ulang yang rumit, dana langsung cair ke rekening.',
-    canonicalUrl: 'https://danacepatbpkb.id/#topup',
+    canonicalUrl: 'https://gadaibpkbterdekat.com/?page=topup',
     keywords: 'top up pinjaman bpkb, tambah dana pinjaman adira, topup kredit bpkb, pinjaman nasabah adira',
     breadcrumbs: [
-      { name: 'Beranda', url: 'https://danacepatbpkb.id/' },
-      { name: 'Top Up Pinjaman', url: 'https://danacepatbpkb.id/#topup' }
+      { name: 'Beranda', url: 'https://gadaibpkbterdekat.com/' },
+      { name: 'Top Up Pinjaman', url: 'https://gadaibpkbterdekat.com/?page=topup' }
     ]
   },
   cabang: {
     title: '515 Lokasi Kantor Cabang Adira Finance Terdekat - Seluruh Wilayah Indonesia',
     description: 'Temukan alamat, nomor telepon, jam operasional, dan kontak WhatsApp resmi 515 kantor cabang Adira Finance di kota dan kabupaten seluruh Indonesia.',
-    canonicalUrl: 'https://danacepatbpkb.id/#cabang',
+    canonicalUrl: 'https://gadaibpkbterdekat.com/?page=cabang',
     keywords: 'kantor cabang adira finance, alamat adira terdekat, nomor telepon adira, cabang adira jakarta surabaya bandung medan',
     breadcrumbs: [
-      { name: 'Beranda', url: 'https://danacepatbpkb.id/' },
-      { name: 'Peta & Lokasi Cabang', url: 'https://danacepatbpkb.id/#cabang' }
+      { name: 'Beranda', url: 'https://gadaibpkbterdekat.com/' },
+      { name: 'Peta & Lokasi Cabang', url: 'https://gadaibpkbterdekat.com/?page=cabang' }
     ]
   },
   artikel: {
     title: 'Artikel & Panduan Finansial Gadai BPKB - Tips Cerdas Keuangan & Kredit Aman',
     description: 'Kumpulan tips, panduan hukum, syarat administrasi, dan simulasi kredit gadai BPKB motor, mobil, dan take over resmi Adira Finance.',
-    canonicalUrl: 'https://danacepatbpkb.id/#artikel',
+    canonicalUrl: 'https://gadaibpkbterdekat.com/?page=artikel',
     keywords: 'tips gadai bpkb, syarat gadai bpkb, simulasi pinjaman bpkb, panduan kredit mobil, artikel keuangan adira',
     breadcrumbs: [
-      { name: 'Beranda', url: 'https://danacepatbpkb.id/' },
-      { name: 'Artikel & Panduan', url: 'https://danacepatbpkb.id/#artikel' }
+      { name: 'Beranda', url: 'https://gadaibpkbterdekat.com/' },
+      { name: 'Artikel & Panduan', url: 'https://gadaibpkbterdekat.com/?page=artikel' }
     ]
   },
   'tentang-kami': {
     title: 'Tentang Kami - Kemitraan Resmi Adira Dinamika Multi Finance Tbk',
     description: 'Profil resmi kemitraan Adira Finance terpercaya. Layanan terdaftar dan diawasi oleh OJK, berkomitmen memberikan solusi finansial transparan dan cepat.',
-    canonicalUrl: 'https://danacepatbpkb.id/#tentang-kami',
+    canonicalUrl: 'https://gadaibpkbterdekat.com/?page=tentang-kami',
     keywords: 'tentang adira finance, mitra resmi adira finance, agen adira bpkb terpercaya, legalitas ojk adira',
     breadcrumbs: [
-      { name: 'Beranda', url: 'https://danacepatbpkb.id/' },
-      { name: 'Tentang Kami', url: 'https://danacepatbpkb.id/#tentang-kami' }
+      { name: 'Beranda', url: 'https://gadaibpkbterdekat.com/' },
+      { name: 'Tentang Kami', url: 'https://gadaibpkbterdekat.com/?page=tentang-kami' }
     ]
   }
 };
@@ -170,12 +170,12 @@ export function updateBranchSeo(branch: FullBranch) {
   const description = `Alamat kantor cabang ${branch.name} di ${branch.city}, ${branch.province}. Layanan gadai BPKB motor, mobil, truk, dan pickup resmi Adira Finance. Jam buka: ${branch.hours}. Hubungi WhatsApp: ${branch.whatsapp}.`;
   
   const slug = branch.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-  const branchUrl = `https://danacepatbpkb.id/#cabang/${branch.city.toLowerCase()}/${slug}`;
+  const branchUrl = `https://gadaibpkbterdekat.com/?cabang=${branch.id}`;
   
   const breadcrumbs = [
-    { name: 'Beranda', url: 'https://danacepatbpkb.id/' },
-    { name: 'Peta & Lokasi Cabang', url: 'https://danacepatbpkb.id/#cabang' },
-    { name: `${branch.city}`, url: `https://danacepatbpkb.id/#cabang/${branch.city.toLowerCase()}` },
+    { name: 'Beranda', url: 'https://gadaibpkbterdekat.com/' },
+    { name: 'Peta & Lokasi Cabang', url: 'https://gadaibpkbterdekat.com/?page=cabang' },
+    { name: `${branch.city}`, url: `https://gadaibpkbterdekat.com/?cabang=${branch.id}` },
     { name: branch.name, url: branchUrl }
   ];
 
@@ -215,8 +215,8 @@ export function updateBranchSeo(branch: FullBranch) {
     branchSchema.textContent = JSON.stringify(branchLd);
   }
 
-  // Update hash for deep linking and local SEO
+  // Update URL for deep linking and local SEO without reloading
   if (typeof window !== 'undefined') {
-    window.history.replaceState(null, '', `#cabang/${branch.city.toLowerCase()}/${slug}`);
+    window.history.replaceState(null, '', `?cabang=${branch.id}`);
   }
 }

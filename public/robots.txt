@@ -7,4 +7,4 @@ Disallow: /#cms
 Crawl-delay: 1
 
 # Sitemaps
-Sitemap: /sitemap.xml
+Sitemap: https://gadaibpkbterdekat.com/sitemap.xml
